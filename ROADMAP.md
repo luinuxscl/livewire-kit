@@ -46,4 +46,45 @@
 
 ---
 
+---
+
+## Gestión de Roles y Permisos (Spatie)
+**Estado general:** 🟡 Pendiente
+**Responsable:**  
+**Notas:** Cada usuario podrá tener un solo rol. Los roles predefinidos serán: root, admin y standard. Se utilizará el paquete spatie/laravel-permission.
+**Implementación:** El sistema debe ser claro, desacoplado y fácil de personalizar para proyectos derivados.
+**Planificación:**
+
+### Fase 1: Instalación y configuración
+- [ ] Instalar el paquete Spatie y publicar migraciones
+- [ ] Ejecutar migraciones de roles y permisos
+- [ ] Añadir el trait HasRoles al modelo User
+- [ ] Configurar el caché de permisos (opcional)
+
+### Fase 2: Definición de roles y permisos base
+- [ ] Definir los roles iniciales (root, admin, standard)
+- [ ] Crear un seeder para poblar roles base (solo un rol por usuario)
+- [ ] Documentar los roles y su propósito
+
+### Fase 3: Integración en la aplicación
+- [ ] Proteger rutas y controladores con middleware de roles
+- [ ] Añadir directivas Blade para mostrar/ocultar contenido según rol
+- [ ] Ejemplos en vistas y layouts
+
+### Fase 4: Gestión y asignación desde la UI (opcional)
+- [ ] Crear componentes/vistas para asignar roles desde el panel
+- [ ] Listar usuarios y roles en el panel de administración
+- [ ] Permitir edición solo a usuarios autorizados
+
+### Fase 5: Testing y validación
+- [ ] Agregar tests para asegurar la protección de rutas y vistas
+- [ ] Probar la asignación y revocación de roles
+
+### Fase 6: Documentación
+- [ ] Documentar el flujo en /docs/roles_permisos.md
+- [ ] Incluir ejemplos de seeders, comandos y uso en Blade/controladores
+
+**Estado final esperado:**
+> El sistema de roles y permisos debe ser robusto, fácil de extender y dejar clara la restricción de un solo rol por usuario. Todo debe estar documentado para que futuros proyectos puedan aprovechar y personalizar la solución.
+
 (El resto del roadmap permanece igual)

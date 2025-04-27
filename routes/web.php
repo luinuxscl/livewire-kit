@@ -19,5 +19,10 @@ Route::middleware(['auth'])->group(function () {
     Volt::route('settings/appearance', 'settings.appearance')->name('settings.appearance');
 });
 
+// Página estática: About
+use App\Http\Controllers\PageController;
+
+Route::get('about', fn() => app(\App\Http\Controllers\PageController::class)->show('about'))->name('about');
+
 require __DIR__.'/auth.php';
 
