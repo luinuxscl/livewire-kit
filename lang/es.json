@@ -281,5 +281,10 @@
     "Dark": "Oscuro",
     "System": "Sistema",
     "Search": "Buscar",
-    "Repository": "Repositorio"
+    "Repository": "Repositorio",
+    "Log in to your account": "Iniciar sesión en tu cuenta",
+    "Enter your email and password below to log in": "Ingresa tu correo y contraseña para iniciar sesión",
+    "Email address": "Correo electrónico",
+    "Don't have an account?": "¿No tienes una cuenta?",
+    "Sign up": "Registrarse"
 }
