@@ -41,6 +41,11 @@
                         label="Documentation"
                     />
                 </flux:tooltip>
+
+                {{-- Selector de idioma --}}
+                <div class="flex items-center px-1">
+                    <livewire:language-switcher />
+                </div>
             </flux:navbar>
 
             <!-- Desktop User Menu -->
@@ -120,5 +125,6 @@
         {{ $slot }}
 
         @fluxScripts
+        @include('components.layouts.app.scripts')
     </body>
 </html>
