@@ -45,6 +45,15 @@
                     />
                 </flux:tooltip>
 
+                <flux:tooltip :content="__('Users')" position="bottom">
+                    <flux:navbar.item
+                        class="h-10 max-lg:hidden [&>div>svg]:size-5"
+                        icon="user-group"
+                        href="{{ route('admin.users.index') }}"
+                        label="Users"
+                    />
+                </flux:tooltip>
+
                 {{-- Selector de idioma --}}
                 <div class="flex items-center px-1">
                     <livewire:language-switcher />
@@ -121,6 +130,10 @@
 
                 <flux:navlist.item icon="book-open-text" href="https://github.com/luinuxscl/livewire-kit/tree/develop/docs" target="_blank">
                 {{ __('Documentation') }}
+                </flux:navlist.item>
+
+                <flux:navlist.item icon="book-open-text" href="{{ route('admin.users.index') }}" target="_blank">
+                {{ __('Users') }}
                 </flux:navlist.item>
             </flux:navlist>
         </flux:sidebar>
