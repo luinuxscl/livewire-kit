@@ -132,6 +132,8 @@
         @include('components.layouts.app.footer')
 
         @fluxScripts
+        @stack('scripts')
+        @stack('modals')
         @include('components.layouts.app.scripts')
     </body>
 </html>

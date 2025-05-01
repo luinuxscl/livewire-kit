@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
+use App\Http\Controllers\UserController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -12,11 +13,14 @@ Route::view('dashboard', 'dashboard')
     ->name('dashboard');
 
 Route::middleware(['auth'])->group(function () {
+    // Rutas para admin.users.index
+    Route::get('admin/users', [UserController::class, 'index'])->name('admin.users.index');
     Route::redirect('settings', 'settings/profile');
 
     Volt::route('settings/profile', 'settings.profile')->name('settings.profile');
     Volt::route('settings/password', 'settings.password')->name('settings.password');
     Volt::route('settings/appearance', 'settings.appearance')->name('settings.appearance');
+
 });
 
 // Página estática: About
@@ -24,5 +28,4 @@ use App\Http\Controllers\PageController;
 
 Route::get('about', fn() => app(\App\Http\Controllers\PageController::class)->show('about'))->name('about');
 
-require __DIR__.'/auth.php';
-
+require __DIR__ . '/auth.php';
