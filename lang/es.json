@@ -287,5 +287,7 @@
     "Email address": "Correo electrónico",
     "Don't have an account?": "¿No tienes una cuenta?",
     "Sign up": "Registrarse",
-    "actions": "acciones"
+    "actions": "acciones",
+    "Here you can manage the users of the platform.": "Aquí puedes gestionar los usuarios de la plataforma.",
+    "New User": "Nuevo Usuario"
 }
