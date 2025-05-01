@@ -14,13 +14,15 @@ npm install && npm run dev
 cp .env.example .env
 php artisan key:generate
 php artisan migrate
-php artisan serve
+composer run dev
 ```
 
 Accede a la app en: http://localhost:8000
 
 ## Documentación
+
 Encuentra la documentación completa en [`/docs`](./docs).
 
 ## Autor
-- **Luis Sepulveda** — [luinuxscl](https://github.com/luinuxscl) — luis@like.cl — [like.cl](https://like.cl)
+
+-   **Luis Sepulveda** — [luinuxscl](https://github.com/luinuxscl) — luis@like.cl — [like.cl](https://like.cl)
