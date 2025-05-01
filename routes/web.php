@@ -15,6 +15,9 @@ Route::view('dashboard', 'dashboard')
 Route::middleware(['auth'])->group(function () {
     // Rutas para admin.users.index
     Route::get('admin/users', [UserController::class, 'index'])->name('admin.users.index');
+    Route::view('admin/roles', 'admin.roles.index')
+        ->middleware(['role:admin|root'])
+        ->name('admin.roles.index');
     Route::redirect('settings', 'settings/profile');
 
     Volt::route('settings/profile', 'settings.profile')->name('settings.profile');

@@ -289,5 +289,7 @@
     "Sign up": "Registrarse",
     "actions": "acciones",
     "Here you can manage the users of the platform.": "Aquí puedes gestionar los usuarios de la plataforma.",
-    "New User": "Nuevo Usuario"
+    "New User": "Nuevo Usuario",
+    "New Role": "Nuevo Rol",
+    "Here you can manage the roles of the platform.": "Aquí puedes gestionar los roles de la plataforma."
 }
