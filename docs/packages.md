@@ -25,10 +25,13 @@ Esta aplicación utiliza los siguientes paquetes principales. Aquí se documenta
 ---
 
 ## Tablas dinámicas y avanzadas
-- **rappasoft/laravel-livewire-tables**  
-  [github.com/rappasoft/laravel-livewire-tables](https://github.com/rappasoft/laravel-livewire-tables)
-  - Permite crear tablas interactivas, ordenables, filtrables y paginadas usando Livewire.
-  - Útil para paneles de administración y vistas de datos complejos.
+- **power-components/livewire-powergrid** (PowerGrid v6+)
+  [github.com/Power-Components/livewire-powergrid](https://github.com/Power-Components/livewire-powergrid)
+- Permite crear tablas interactivas, ordenables, filtrables, exportables y altamente personalizables usando Livewire.
+- Es el paquete recomendado y estándar para todas las tablas en este proyecto. Siempre que sea posible, las tablas deben implementarse usando PowerGrid v6 o superior.
+  - Facilita la integración con acciones personalizadas, botones, modales y edición en línea.
+
+> **Nota:** El uso de PowerGrid es obligatorio para nuevas tablas y se recomienda migrar tablas existentes para mantener consistencia y aprovechar sus ventajas.
 
 ---
 
