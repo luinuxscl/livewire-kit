@@ -25,16 +25,29 @@ class UserEditModal extends Component
         $this->userId = $userId;
         $this->isOpen = true;
 
-        // Fetch user data from the server
         $user = \App\Models\User::find($this->userId);
+        $currentUser = auth()->user();
+        $userIsRoot = $user && $user->hasRole('root');
+        $currentIsRoot = $currentUser && $currentUser->hasRole('root');
+        $currentIsAdmin = $currentUser && $currentUser->hasRole('admin');
+
+        // Solo root puede editar a root
+        if ($userIsRoot && !$currentIsRoot) {
+            session()->flash('error', __('Solo un usuario root puede editar a otro root.'));
+            $this->closeEditUserModal();
+            return;
+        }
+        // Solo admin/root pueden editar usuarios
+        if (!$currentIsRoot && !$currentIsAdmin) {
+            session()->flash('error', __('No tienes permisos para editar usuarios.'));
+            $this->closeEditUserModal();
+            return;
+        }
         if ($user) {
             $this->name = $user->name;
             $this->email = $user->email;
             $this->role = $user->getRoleNames()->first() ?? '';
         }
-        
-        // No necesitamos activar el modal explícitamente aquí,
-        // ya que se activará a través del evento Alpine.js desde el botón
     }
     public function closeEditUserModal()
     {
@@ -53,20 +66,43 @@ class UserEditModal extends Component
         ]);
 
         $user = \App\Models\User::find($this->userId);
+        $currentUser = auth()->user();
+        $userIsRoot = $user && $user->hasRole('root');
+        $currentIsRoot = $currentUser && $currentUser->hasRole('root');
+        $currentIsAdmin = $currentUser && $currentUser->hasRole('admin');
+
+        // Solo root puede editar a root
+        if ($userIsRoot && !$currentIsRoot) {
+            session()->flash('error', __('Only a root user can edit another root user.'));
+            $this->closeEditUserModal();
+            return;
+        }
+        // Solo admin/root pueden editar usuarios
+        if (!$currentIsRoot && !$currentIsAdmin) {
+            session()->flash('error', __('You do not have permission to edit users.'));
+            $this->closeEditUserModal();
+            return;
+        }
+        // An admin cannot change the role of a root user
+        if ($userIsRoot && $currentIsAdmin && $this->role !== 'root') {
+            session()->flash('error', __('An admin cannot demote a root user.'));
+            $this->closeEditUserModal();
+            return;
+        }
+        // A root user cannot demote themselves
+        if ($userIsRoot && $currentIsRoot && $user->id === $currentUser->id && $this->role !== 'root') {
+            session()->flash('error', __('You cannot demote your own root user.'));
+            $this->closeEditUserModal();
+            return;
+        }
         if ($user) {
-            // Actualizando los datos del usuario
             $user->name = $this->name;
             $user->email = $this->email;
             $user->save();
-            // Asignar el rol único
             if ($this->role) {
                 $user->syncRoles([$this->role]);
             }
-            
-            // Notificar que se ha actualizado el usuario
             $this->dispatch('editUserUpdated');
-            
-            // Cerrar el modal
             $this->closeEditUserModal();
         }
     }

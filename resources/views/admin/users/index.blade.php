@@ -19,5 +19,5 @@
     <livewire:user-table />
     <livewire:user-edit-modal />
     <livewire:user-create-modal />
-
+    <livewire:user-delete-modal />
 </x-page>

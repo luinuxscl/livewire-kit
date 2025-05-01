@@ -19,6 +19,7 @@ final class UserTable extends PowerGridComponent
 {
     protected $listeners = [
         'editUserUpdated' => '$refresh',
+        'userDeleted' => '$refresh',
     ];
     public string $tableName = 'user-table-7qes5c-table';
 
