@@ -14,7 +14,16 @@
                 </p>
             </div>
         </div>
-        <livewire:user-create-button />
+        <div class="flex justify-end gap-2">
+            <flux:button
+                :href="route('admin.roles.index')"
+                icon:trailing="arrow-turn-down-left"
+            >
+                {{ __('Go to Roles') }}
+            </flux:button>
+            <livewire:user-create-button />
+        </div>
+        
     </div>
     <livewire:user-table />
     <livewire:user-edit-modal />

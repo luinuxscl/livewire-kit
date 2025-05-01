@@ -302,5 +302,6 @@
     "Only a root user can edit another root user.": "Solo un usuario root puede editar a otro root.",
     "You do not have permission to edit users.": "No tienes permisos para editar usuarios.",
     "An admin cannot demote a root user.": "Un admin no puede degradar a un usuario root.",
-    "You cannot demote your own root user.": "No puedes degradar tu propio usuario root."
+    "You cannot demote your own root user.": "No puedes degradar tu propio usuario root.",
+    "Go to Roles": "Ir a Roles"
 }
