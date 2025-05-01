@@ -157,6 +157,7 @@
 
         <main class="flex-1 flex flex-col">
             {{ $slot }}
+            @livewire('toast-manager')
         </main>
 
         @include('components.layouts.app.footer')

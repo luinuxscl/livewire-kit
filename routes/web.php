@@ -20,6 +20,10 @@ Route::middleware(['auth'])->group(function () {
         ->name('admin.roles.index');
     Route::redirect('settings', 'settings/profile');
 
+    // Playground solo para root
+    Route::get('playground', \App\Http\Controllers\PlaygroundController::class)
+        ->name('playground');
+
     Volt::route('settings/profile', 'settings.profile')->name('settings.profile');
     Volt::route('settings/password', 'settings.password')->name('settings.password');
     Volt::route('settings/appearance', 'settings.appearance')->name('settings.appearance');
