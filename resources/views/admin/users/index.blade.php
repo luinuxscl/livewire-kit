@@ -1,6 +1,6 @@
 <x-page :title="__('Users')">
 
-    <div class="flex items-center justify-between">
+    <div class="flex items-center justify-between mb-6">
         <div class="flex gap-2">
             <div class="flex pt-1 me-2">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
@@ -14,7 +14,7 @@
                 </p>
             </div>
         </div>
-        <div class="flex justify-end gap-2">
+        <div class="flex justify-end gap-3">
             <flux:button
                 :href="route('admin.roles.index')"
                 icon:trailing="arrow-turn-down-left"

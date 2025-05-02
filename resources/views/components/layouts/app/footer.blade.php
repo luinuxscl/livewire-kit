@@ -1,7 +1,7 @@
 <footer
     class="border-t border-zinc-200 bg-zinc-50 text-zinc-600
     dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-400 py-4">
-    <div class="container mx-auto px-8 flex flex-col md:flex-row items-center justify-between gap-2 text-sm">
+    <div class="mx-auto w-full h-full [:where(&)]:max-w-7xl px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-2 text-sm">
         <div>
             &copy; {{ date('Y') }} Livewire Kit. {{ __('All rights reserved.') }}
         </div>
