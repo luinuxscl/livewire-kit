@@ -21,18 +21,18 @@ Este documento define el plan de trabajo para estandarizar y desarrollar los com
   - [x] 3.3: Establecer directrices de accesibilidad y contrastes. (descartada)
   - [x] 3.4: Guardar componentes personalizados en `resources/views/components/ui/`.
 
-- [ ] Etapa 4: Desarrollo de componentes base
-  - [ ] 4.1: Desarrollar componente Card en `resources/views/components/ui/card.blade.php`.
-  - [ ] 4.2: Documentar Card en `/docs/components/card.md`.
-  - [ ] 4.3: Integrar ejemplos de uso para Card.
+- [x] Etapa 4: Desarrollo de componentes base
+  - [x] 4.1: Desarrollar componente Card en `resources/views/components/ui/card.blade.php`.
+  - [x] 4.2: Documentar Card en `/docs/components/card.md`.
+  - [x] 4.3: Integrar ejemplos de uso para Card.
 
 - [ ] Etapa 5: Integración y pruebas
-  - [ ] 5.1: Integrar componentes en páginas de ejemplo.
-  - [ ] 5.2: Realizar pruebas de usabilidad y accesibilidad.
-  - [ ] 5.3: Ajustar estilos según feedback.
+  - [x] 5.1: Integrar componentes en páginas de ejemplo.
+  - [x] 5.2: Realizar pruebas de usabilidad y accesibilidad. (descartada)
+  - [x] 5.3: Ajustar estilos según feedback. (postergada)
 
 - [ ] Etapa 6: Documentación y publicación
-  - [ ] 6.1: Crear guía de uso de componentes.
-  - [ ] 6.2: Actualizar docs de personalización.
-  - [ ] 6.3: Revisar código, pruebas finales y merge.
-  - [ ] 6.4: Crear resumen de sistema de componentes en `docs/components/COMPONENTS-OVERVIEW.md`.
+  - [x] 6.1: Crear guía de uso de componentes.
+  - [x] 6.2: Actualizar docs de personalización.
+  - [x] 6.3: Revisar código, pruebas finales y merge.
+  - [x] 6.4: Crear resumen de sistema de componentes en `docs/components/COMPONENTS-OVERVIEW.md`.
