@@ -29,9 +29,79 @@
     --color-zinc-900: #171717;
     --color-zinc-950: #0a0a0a;
 
+    --color-success-50: oklch(0.982 0.018 155.826);
+    --color-success-200: oklch(0.925 0.084 155.995);
+    --color-success-300: oklch(0.871 0.15 154.449);
+    --color-success-400: oklch(0.792 0.209 151.711);
+    --color-success-500: oklch(0.723 0.219 149.579);
+    --color-success-600: oklch(0.627 0.194 149.214);
+    --color-success-700: oklch(0.527 0.154 150.069);
+    --color-success-800: oklch(0.448 0.119 151.328);
+    --color-success-900: oklch(0.364 0.082 152.662);
+    --color-success-950: oklch(0.279 0.042 153.662);
+
+    --color-info-50: oklch(0.97 0.014 254.604);
+    --color-info-100: oklch(0.932 0.032 255.585);
+    --color-info-200: oklch(0.882 0.059 254.128);
+    --color-info-300: oklch(0.809 0.105 251.813);
+    --color-info-400: oklch(0.707 0.165 254.624);
+    --color-info-500: oklch(0.623 0.214 259.815);
+    --color-info-600: oklch(0.546 0.245 262.881);
+    --color-info-700: oklch(0.488 0.243 264.376);
+    --color-info-800: oklch(0.424 0.199 265.638);
+    --color-info-900: oklch(0.364 0.156 266.522);
+    --color-info-950: oklch(0.279 0.077 266.522);
+
+    --color-warning-50: oklch(0.987 0.022 95.277);
+    --color-warning-200: oklch(0.924 0.12 95.746);
+    --color-warning-300: oklch(0.879 0.169 91.605);
+    --color-warning-400: oklch(0.828 0.189 84.429);
+    --color-warning-500: oklch(0.769 0.188 70.08);
+    --color-warning-600: oklch(0.666 0.179 58.318);
+    --color-warning-700: oklch(0.555 0.163 48.998);
+    --color-warning-800: oklch(0.473 0.137 46.201);
+    --color-warning-950: oklch(0.279 0.077 45.635);
+    
+    --color-danger-50: oklch(0.971 0.013 17.38);
+    --color-danger-200: oklch(0.885 0.062 18.334);
+    --color-danger-300: oklch(0.808 0.114 19.571);
+    --color-danger-400: oklch(0.704 0.191 22.216);
+    --color-danger-500: oklch(0.637 0.237 25.331);
+    --color-danger-600: oklch(0.577 0.245 27.325);
+    --color-danger-700: oklch(0.505 0.213 27.518);
+    --color-danger-800: oklch(0.444 0.177 26.899);
+    --color-danger-900: oklch(0.396 0.141 25.723);
+    --color-danger-950: oklch(0.279 0.077 25.723);
+
     --color-accent: var(--color-neutral-800);
     --color-accent-content: var(--color-neutral-800);
     --color-accent-foreground: var(--color-white);
+
+    --color-success: var(--color-success-600);
+    --color-info: var(--color-info-600);
+    --color-warning: var(--color-warning-600);
+    --color-danger: var(--color-danger-600);
+}
+
+.btn{
+    @apply cursor-pointer;
+}
+
+.btn-success{
+    @apply 
+    border-success text-success-50 bg-success hover:bg-success-500;
+}
+
+.btn-info{
+    @apply border-info text-info-50 bg-info hover:bg-info-500;
+}
+
+.btn-warning{
+    @apply border-warning text-warning-50 bg-warning hover:bg-warning-500;
+}
+
+.btn-danger{
+    @apply border-danger text-danger-50 bg-danger hover:bg-danger-500;
 }
 
 @layer theme {
