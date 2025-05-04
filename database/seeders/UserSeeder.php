@@ -10,46 +10,48 @@ class UserSeeder extends Seeder
 {
     public function run(): void
     {
-        $password = Hash::make('password'); 
-        
-        // Usuarios especiales
-        $root = User::updateOrCreate(
-            ['email' => 'root@like.cl'],
-            [
-                'name' => 'Luis Sepulveda',
-                'password' => $password ,
-            ]
-        );
-        $root->syncRoles(['root']);
+        if (! app()->isProduction()) {
+            $password = Hash::make('password');
 
-        $admin = User::updateOrCreate(
-            ['email' => 'admin@like.cl'],
-            [
-                'name' => 'Gabriela Mordor',
-                'password' => $password ,
-            ]
-        );
-        $admin->syncRoles(['admin']);
+            // Usuarios especiales
+            $root = User::updateOrCreate(
+                ['email' => 'root@like.cl'],
+                [
+                    'name' => 'Luis Sepulveda',
+                    'password' => $password,
+                ]
+            );
+            $root->syncRoles(['root']);
 
-        $standard = User::updateOrCreate(
-            ['email' => 'standard@like.cl'],
-            [
-                'name' => 'Linus Torvalds',
+            $admin = User::updateOrCreate(
+                ['email' => 'admin@like.cl'],
+                [
+                    'name' => 'Gabriela Mordor',
+                    'password' => $password,
+                ]
+            );
+            $admin->syncRoles(['admin']);
+
+            $standard = User::updateOrCreate(
+                ['email' => 'standard@like.cl'],
+                [
+                    'name' => 'Linus Torvalds',
+                    'password' => $password,
+                ]
+            );
+            $standard->syncRoles(['standard']);
+
+            // 25 usuarios sin rol
+            User::factory(25)->create([
                 'password' => $password,
-            ]
-        );
-        $standard->syncRoles(['standard']);
+            ]);
 
-        // 25 usuarios sin rol
-        User::factory(25)->create([
-            'password' => $password,
-        ]);
-
-        // 50 usuarios con rol standard
-        User::factory(50)->create([
-            'password' => $password,
-        ])->each(function($user) {
-            $user->syncRoles(['standard']);
-        });
+            // 50 usuarios con rol standard
+            User::factory(50)->create([
+                'password' => $password,
+            ])->each(function ($user) {
+                $user->syncRoles(['standard']);
+            });
+        }
     }
 }
