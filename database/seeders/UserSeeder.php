@@ -10,48 +10,62 @@ class UserSeeder extends Seeder
 {
     public function run(): void
     {
-        if (! app()->isProduction()) {
+        if (!app()->isProduction()) {
             $password = Hash::make('password');
 
-            // Usuarios especiales
-            $root = User::updateOrCreate(
-                ['email' => 'root@like.cl'],
+            $users = [
                 [
-                    'name' => 'Luis Sepulveda',
-                    'password' => $password,
-                ]
-            );
-            $root->syncRoles(['root']);
-
-            $admin = User::updateOrCreate(
-                ['email' => 'admin@like.cl'],
+                    'email' => 'root@like.cl',
+                    'first_name' => 'Luis',
+                    'last_name' => 'Sepulveda',
+                    'phone' => '56933594534',
+                    'address' => 'Ramon Toro Ibanez 5100, Macul',
+                    'birthday' => '1979-03-05',
+                    'bio' => 'Un pobre y triste weon',
+                    'role' => 'root',
+                ],
                 [
-                    'name' => 'Gabriela Mordor',
-                    'password' => $password,
-                ]
-            );
-            $admin->syncRoles(['admin']);
-
-            $standard = User::updateOrCreate(
-                ['email' => 'standard@like.cl'],
+                    'email' => 'admin@like.cl',
+                    'first_name' => 'Acid',
+                    'last_name' => 'Burn',
+                    'phone' => '56933594534',
+                    'address' => 'Amador Neghme Rodriguez 3714, Macul',
+                    'birthday' => '1979-03-05',
+                    'bio' => 'Kate Libby. Hacker experta.',
+                    'role' => 'admin',
+                ],
                 [
-                    'name' => 'Linus Torvalds',
-                    'password' => $password,
-                ]
-            );
-            $standard->syncRoles(['standard']);
+                    'email' => 'barby_root@like.cl',
+                    'first_name' => 'Barbara',
+                    'last_name' => 'Gordon',
+                    'role' => 'root',
+                    'phone' => '56933594534',
+                    'address' => 'Amador Neghme Rodriguez 3714, Macul',
+                    'birthday' => '1979-03-05',
+                    'bio' => 'Oracle en los cómics de DC (hacker y bibliotecaria badass)',
+                ],
+            ];
 
-            // 25 usuarios sin rol
-            User::factory(25)->create([
-                'password' => $password,
-            ]);
+            foreach ($users as $userData) {
+                $newUser = User::updateOrCreate(
+                    ['email' => $userData['email']],
+                    [
+                        'name' => $userData['first_name'] . ' ' . $userData['last_name'],
+                        'password' => $password,
+                    ]
+                );
 
-            // 50 usuarios con rol standard
-            User::factory(50)->create([
-                'password' => $password,
-            ])->each(function ($user) {
-                $user->syncRoles(['standard']);
-            });
+                $newUser->profile()->update([
+                    'first_name' => $userData['first_name'],
+                    'last_name'  => $userData['last_name'],
+                ]);
+
+                if (!empty($userData['role'])) {
+                    $newUser->syncRoles($userData['role']);
+                }
+            }
+
+            User::factory()->count(98)->create();
         }
     }
 }
