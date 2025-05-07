@@ -16,6 +16,8 @@ Route::view('dashboard', 'dashboard')
 Route::middleware(['auth'])->group(function () {
     // Rutas para admin.users.index
     Route::get('admin/users', [UserController::class, 'index'])->name('admin.users.index');
+    Route::get('admin/users/{user}', [UserController::class, 'show'])->name('admin.users.show');
+    Route::get('admin/users/{user}/edit', [UserController::class, 'edit'])->name('admin.users.edit');
     Route::view('admin/roles', 'admin.roles.index')
         ->middleware(['role:admin|root'])
         ->name('admin.roles.index');

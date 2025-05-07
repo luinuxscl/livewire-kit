@@ -19,22 +19,25 @@
                 </div>
             </div>
             <div class="flex justify-end gap-2">
-                <flux:tooltip content="Dashboard" position="top">
+                <flux:tooltip content="Dashboard" position="left">
                     <flux:button
-                    variant="ghost"
+                    variant="primary"
                     :href="route('dashboard')"
-                    icon="layout-grid">
+                    icon="layout-grid"
+                    >
                     </flux:button>
                 </flux:tooltip>
+                @role('admin|root')
                 <flux:tooltip content="Settings" position="top">
                     <flux:button 
-                    variant="ghost"
+                    variant="danger"
                     :href="url('settings/customization')"
                     icon="cog-6-tooth" 
                     icon:variant="outline" />
                 </flux:tooltip>
-                
+                @endrole
                 @isset($buttons)
+                    <flux:separator vertical class="my-2" />
                     {{ $buttons }}
                 @endisset
             </div>

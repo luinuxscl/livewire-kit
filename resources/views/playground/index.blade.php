@@ -6,6 +6,17 @@
     </x-slot>
     {{-- INFO:Poner ejemplos de componentes desde aqui --}}
 
+    {{-- Crear un grid de tres columnas --}}
+    <div class="grid grid-cols-3 gap-4">
+        <x-ui.profile-widget />
+        <x-ui.profile-widget :user="\App\Models\User::find(2)" />
+        <x-ui.profile-widget :user="\App\Models\User::find(3)" />
+        <x-ui.profile-widget :user="\App\Models\User::find(4)" />
+        <x-ui.profile-widget :user="\App\Models\User::find(5)" :showProfile="false" />
+        <x-ui.profile-widget :user="\App\Models\User::find(6)" />
+        <x-ui.profile-widget :user="\App\Models\User::find(7)" :showProfile="false" />
+    </div>
+
     <x-ui.examples.cards />
 
     <flux:separator class="my-6" />

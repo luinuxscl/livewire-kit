@@ -15,7 +15,7 @@ class UserSeeder extends Seeder
 
             $users = [
                 [
-                    'email' => 'root@like.cl',
+                    'email' => 'luis@like.cl',
                     'first_name' => 'Luis',
                     'last_name' => 'Sepulveda',
                     'phone' => '56933594534',
@@ -23,6 +23,7 @@ class UserSeeder extends Seeder
                     'birthday' => '1979-03-05',
                     'bio' => 'Un pobre y triste weon',
                     'role' => 'root',
+                    'avatar' => 'avatars/examples/luinux.jpeg'
                 ],
                 [
                     'email' => 'admin@like.cl',
@@ -33,6 +34,7 @@ class UserSeeder extends Seeder
                     'birthday' => '1979-03-05',
                     'bio' => 'Kate Libby. Hacker experta.',
                     'role' => 'admin',
+                    'avatar' => 'avatars/examples/acidburn.jpg'
                 ],
                 [
                     'email' => 'barby_root@like.cl',
@@ -43,6 +45,18 @@ class UserSeeder extends Seeder
                     'address' => 'Amador Neghme Rodriguez 3714, Macul',
                     'birthday' => '1979-03-05',
                     'bio' => 'Oracle en los cómics de DC (hacker y bibliotecaria badass)',
+                    'avatar' => 'avatars/examples/oracle.jpeg'
+                ],
+                [
+                    'email' => 'gaby@like.cl',
+                    'first_name' => 'Gaby',
+                    'last_name' => 'Mordoj',
+                    'role' => 'admin',
+                    'phone' => '56933594534',
+                    'address' => 'Amador Neghme Rodriguez 3714, Macul',
+                    'birthday' => '1979-03-05',
+                    'bio' => 'La mas pulenta vendedora',
+                    'avatar' => 'avatars/examples/gaby.png'
                 ],
             ];
 
@@ -58,6 +72,11 @@ class UserSeeder extends Seeder
                 $newUser->profile()->update([
                     'first_name' => $userData['first_name'],
                     'last_name'  => $userData['last_name'],
+                    'phone' => $userData['phone'],
+                    'address' => $userData['address'],
+                    'birthday' => $userData['birthday'],
+                    'bio' => $userData['bio'],
+                    'avatar' => $userData['avatar'],
                 ]);
 
                 if (!empty($userData['role'])) {

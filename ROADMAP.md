@@ -1,0 +1,2 @@
+- [ ] 6.3: Revisar código, pruebas finales y merge.
+- [x] 6.4: Cerrar la iteración.
