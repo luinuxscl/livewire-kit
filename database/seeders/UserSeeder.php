@@ -58,6 +58,28 @@ class UserSeeder extends Seeder
                     'bio' => 'La mas pulenta vendedora',
                     'avatar' => 'avatars/examples/gaby.png'
                 ],
+                [
+                    'email' => 'black_widow@like.cl',
+                    'first_name' => 'Black',
+                    'last_name' => 'Widow',
+                    'role' => 'admin',
+                    'phone' => '56933594534',
+                    'address' => 'Amador Neghme Rodriguez 3714, Macul',
+                    'birthday' => '1979-03-05',
+                    'bio' => 'La mas pulenta vendedora',
+                    'avatar' => 'avatars/examples/black_widow.jpg'
+                ],
+                [
+                    'email' => 'mr_robot@like.cl',
+                    'first_name' => 'Mr',
+                    'last_name' => 'Robot',
+                    'role' => 'admin',
+                    'phone' => '56933594534',
+                    'address' => 'Amador Neghme Rodriguez 3714, Macul',
+                    'birthday' => '1979-03-05',
+                    'bio' => 'La mas pulenta vendedora',
+                    'avatar' => 'avatars/examples/mr-robot.jpg'
+                ],
             ];
 
             foreach ($users as $userData) {
