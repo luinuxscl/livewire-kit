@@ -1,3 +1,3 @@
-<x-page :title="__('Personalización')">
+<x-layouts.likeplatform :title="__('Customization')" icon="cog">
     <livewire:app-customization />
-</x-page>
+</x-layouts.likeplatform>

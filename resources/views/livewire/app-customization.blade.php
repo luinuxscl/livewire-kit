@@ -1,15 +1,18 @@
 <div>
-    <form wire:submit.prevent="save" class="space-y-4">
-        <livewire:image-card-uploader
-            table="options"
-            field="site_logo_light"
-            folder="logos"
-        />
-        <livewire:image-card-uploader
-            table="options"
-            field="site_logo_dark"
-            folder="logos"
-        />
+    <form wire:submit.prevent="save">
+
+        @php
+        $optDark = \App\Models\Option::firstOrCreate(['key' => 'site_logo_dark']);
+    @endphp
+    
+    <div class="flex justify-center mb-6">
+        {{-- Logo claro --}}
+        <livewire:branding-logo-uploader />
+
+        {{-- Logo oscuro --}}
+        <livewire:branding-logo-uploader :dark="true" />
+    </div>
+        
 
         <flux:input label="Título del Sitio" wire:model="title" />
         <p class="text-xl text-gray-500 dark:text-gray-400">{{ $title }}</p>
