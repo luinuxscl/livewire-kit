@@ -15,11 +15,13 @@
                 <flux:navbar.item icon="layout-grid" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>
                     {{ __('Dashboard') }}
                 </flux:navbar.item>
+
                 @role('root')
                 <flux:navbar.item icon="bolt" :href="route('playground')" :current="request()->routeIs('playground')" wire:navigate>
                     {{ __('Playground') }}
                 </flux:navbar.item>
                 @endrole
+                
                 <flux:navbar.item icon="information-circle" :href="route('about')" :current="request()->routeIs('about')" wire:navigate>
                     {{ __('About') }}
                 </flux:navbar.item>
@@ -50,6 +52,7 @@
                     />
                 </flux:tooltip>
 
+                @role('root')
                 <flux:tooltip :content="__('Users')" position="bottom">
                     <flux:navbar.item
                         class="h-10 max-lg:hidden [&>div>svg]:size-5"
@@ -58,6 +61,7 @@
                         label="Users"
                     />
                 </flux:tooltip>
+                @endrole
 
                 <flux:dropdown x-data align="end">
                     <flux:button variant="subtle" square class="group" aria-label="Preferred color scheme">
@@ -87,12 +91,19 @@
                 <flux:profile
                     class="cursor-pointer"
                     :initials="auth()->user()->initials()"
+                    :avatar="Storage::url(auth()->user()->profile->avatar)"
+                    :name="auth()->user()->name"
                 />
 
                 <flux:menu>
                     <flux:menu.radio.group>
                         <div class="p-0 text-sm font-normal">
                             <div class="flex items-center gap-2 px-1 py-1.5 text-start text-sm">
+
+                                {{-- Si en avatar existe y no esta vacio o null en profile, mostrar imagen usando componente de flexUI, sino mostrar iniciales --}}
+                                @if (auth()->user()->profile->avatar)
+                                <flux:avatar :src="Storage::url(auth()->user()->profile->avatar)" />
+                                @else
                                 <span class="relative flex h-8 w-8 shrink-0 overflow-hidden rounded-lg">
                                     <span
                                         class="flex h-full w-full items-center justify-center rounded-lg bg-neutral-200 text-black dark:bg-neutral-700 dark:text-white"
@@ -100,6 +111,7 @@
                                         {{ auth()->user()->initials() }}
                                     </span>
                                 </span>
+                                @endif
 
                                 <div class="grid flex-1 text-start text-sm leading-tight">
                                     <span class="truncate font-semibold">{{ auth()->user()->name }}</span>

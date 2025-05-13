@@ -80,6 +80,16 @@ class UserSeeder extends Seeder
                     'bio' => 'La mas pulenta vendedora',
                     'avatar' => 'avatars/examples/mr-robot.jpg'
                 ],
+                [
+                    'email' => 'standard@like.cl',
+                    'first_name' => 'Penelope',
+                    'last_name' => 'Cruz',
+                    'phone' => '56933594534',
+                    'address' => 'Madrid, España',
+                    'birthday' => '1974-04-28',
+                    'bio' => 'Penélope Cruz nació el 28 de abril de 1974 en Madrid, España. Es una actriz y productora, conocida por Vicky Cristina Barcelona (2008), Vanilla Sky (2001) y Volver (2006). Está casada con Javier Bardem desde julio de 2010',
+                    'avatar' => 'avatars/examples/penelope.jpg'
+                ],
             ];
 
             foreach ($users as $userData) {
