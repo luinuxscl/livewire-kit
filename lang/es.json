@@ -307,5 +307,8 @@
     "Phone": "Telefono",
     "Address": "Direccion",
     "User Management": "Gestion de Usuarios",
-    "User updated successfully": "Usuario actualizado correctamente"
+    "User updated successfully": "Usuario actualizado correctamente",
+    "Click here to re-send the verification email.": "Haga clic aquí para reenviar el correo electrónico de verificación.",
+    "A new verification link has been sent to your email address.": "Se ha enviado un nuevo enlace de verificación a tu dirección de correo electrónica.",
+    "Saved.": "Guardado."
 }
