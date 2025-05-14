@@ -88,12 +88,21 @@
 
             <!-- Desktop User Menu -->
             <flux:dropdown position="top" align="end">
+
+                @if (auth()->user()->profile->avatar)
                 <flux:profile
                     class="cursor-pointer"
                     :initials="auth()->user()->initials()"
                     :avatar="Storage::url(auth()->user()->profile->avatar)"
                     :name="auth()->user()->name"
                 />
+                @else
+                <flux:profile
+                    class="cursor-pointer"
+                    :initials="auth()->user()->initials()"
+                    :name="auth()->user()->name"
+                />
+                @endif
 
                 <flux:menu>
                     <flux:menu.radio.group>
