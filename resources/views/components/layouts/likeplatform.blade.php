@@ -19,6 +19,8 @@
                 </div>
             </div>
             <div class="flex justify-end gap-2">
+
+                @if (!request()->routeIs('dashboard'))
                 <flux:tooltip content="Dashboard" position="left">
                     <flux:button
                     variant="primary"
@@ -27,7 +29,10 @@
                     >
                     </flux:button>
                 </flux:tooltip>
-                @role('admin|root')
+                @endif
+
+                {{-- TODO: agregar un boton que solo vean admin y root --}}
+                {{-- @role('admin|root')
                 <flux:tooltip content="Settings" position="top">
                     <flux:button 
                     variant="danger"
@@ -35,7 +40,8 @@
                     icon="cog-6-tooth" 
                     icon:variant="outline" />
                 </flux:tooltip>
-                @endrole
+                @endrole --}}
+
                 @isset($buttons)
                     <flux:separator vertical class="my-2" />
                     {{ $buttons }}
