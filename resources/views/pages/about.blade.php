@@ -1,4 +1,4 @@
-<x-layouts.app :title="__('About')">
+<x-layouts.likeplatform :title="__('About')" icon="info">
     <div class="container mx-auto flex-1 flex-col px-6 lg:px-8 py-10">
         <div class="mb-8">
             <h1 class="text-3xl font-bold mb-2">{{ __('LikePlatform StarterKit') }}</h1>
@@ -34,4 +34,4 @@
             {{ __('Consulta la documentación incluida para aprender a extender y personalizar este kit.') }}
         </div>
     </div>
-</x-layouts.app>
+</x-layouts.likeplatform>
