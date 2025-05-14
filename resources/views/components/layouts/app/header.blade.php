@@ -30,9 +30,12 @@
             <flux:spacer />
 
             <flux:navbar class="me-1.5 space-x-0.5 rtl:space-x-reverse py-0!">
-                <flux:tooltip :content="__('Search')" position="bottom">
+
+                {{-- <flux:tooltip :content="__('Search')" position="bottom">
                     <flux:navbar.item class="!h-10 [&>div>svg]:size-5" icon="magnifying-glass" href="#" :label="__('Search')" />
-                </flux:tooltip>
+                </flux:tooltip> --}}
+
+                @role('root')
                 <flux:tooltip :content="__('Repository')" position="bottom">
                     <flux:navbar.item
                         class="h-10 max-lg:hidden [&>div>svg]:size-5"
@@ -52,7 +55,7 @@
                     />
                 </flux:tooltip>
 
-                @role('root')
+                
                 <flux:tooltip :content="__('Users')" position="bottom">
                     <flux:navbar.item
                         class="h-10 max-lg:hidden [&>div>svg]:size-5"
@@ -64,7 +67,7 @@
                 @endrole
 
                 <flux:dropdown x-data align="end">
-                    <flux:button variant="subtle" square class="group" aria-label="Preferred color scheme">
+                    <flux:button variant="subtle" square class="group cursor-pointer" aria-label="Preferred color scheme">
                         <flux:icon.sun x-show="$flux.appearance === 'light'" variant="mini" class="text-zinc-500 dark:text-white" />
                         <flux:icon.moon x-show="$flux.appearance === 'dark'" variant="mini" class="text-zinc-500 dark:text-white" />
                         <flux:icon.moon x-show="$flux.appearance === 'system' && $flux.dark" variant="mini" />
@@ -72,16 +75,16 @@
                     </flux:button>
 
                     <flux:menu>
-                        <flux:menu.item icon="sun" x-on:click="$flux.appearance = 'light'">Light</flux:menu.item>
-                        <flux:menu.item icon="moon" x-on:click="$flux.appearance = 'dark'">Dark</flux:menu.item>
-                        <flux:menu.item icon="computer-desktop" x-on:click="$flux.appearance = 'system'">System</flux:menu.item>
+                        <flux:menu.item icon="sun" x-on:click="$flux.appearance = 'light'" class="cursor-pointer">{{ __('Light') }}</flux:menu.item>
+                        <flux:menu.item icon="moon" x-on:click="$flux.appearance = 'dark'" class="cursor-pointer">{{ __('Dark') }}</flux:menu.item>
+                        <flux:menu.item icon="computer-desktop" x-on:click="$flux.appearance = 'system'" class="cursor-pointer">{{ __('System') }}</flux:menu.item>
                     </flux:menu>
                 </flux:dropdown>
 
                 {{-- Selector de idioma --}}
-                <div class="flex items-center px-1">
+                {{-- <div class="flex items-center px-1">
                     <livewire:language-switcher />
-                </div>
+                </div> --}}
 
                 
             </flux:navbar>
