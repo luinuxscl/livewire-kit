@@ -27,6 +27,8 @@
                 <span class="ms-4">
                     <x-github />
                 </span>
+                <flux:separator vertical="true" />
+                <x-breakpoint />
             @endrole
         </div>
     </div>

@@ -18,8 +18,6 @@ Route::middleware(['auth'])->group(function () {
     Volt::route('settings/profile', 'settings.profile')->name('settings.profile');
     Volt::route('settings/password', 'settings.password')->name('settings.password');
     Volt::route('settings/appearance', 'settings.appearance')->name('settings.appearance');
-    // Route::get('settings/customization', CustomizationController::class)->name('settings.customization');
-
 });
 
 // Rutas solo para autenticados y con roles admin o root, con prefix admin
@@ -30,6 +28,8 @@ Route::middleware(['auth', 'role:admin|root'])->prefix('admin')->group(function 
     Route::view('roles', 'admin.roles.index')->name('admin.roles.index');
 
     Route::get('playground', \App\Http\Controllers\PlaygroundController::class)->name('playground');
+
+    Route::get('/customization', CustomizationController::class)->name('customization');
 });
 
 // Página estática: About

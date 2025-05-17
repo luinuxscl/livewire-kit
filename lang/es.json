@@ -314,5 +314,11 @@
     "Choose file": "Elegir archivo",
     "Choose files": "Elegir archivos",
     "No file chosen": "Ningún archivo elegido",
-    "Upload": "Subir"
+    "Upload": "Subir",
+    "Customization": "Personalización",
+    "Option updated successfully": "Opción actualizada correctamente",
+    "Option not found": "Opción no encontrada",
+    "Change the value of this option": "Cambia el valor de esta opción",
+    "Save changes": "Guardar cambios",
+    "No changes": "Sin cambios"
 }

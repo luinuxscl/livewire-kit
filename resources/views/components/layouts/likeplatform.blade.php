@@ -31,16 +31,6 @@
                 </flux:tooltip>
                 @endif
 
-                {{-- TODO: agregar un boton que solo vean admin y root --}}
-                {{-- @role('admin|root')
-                <flux:tooltip content="Settings" position="top">
-                    <flux:button 
-                    variant="danger"
-                    :href="url('settings/customization')"
-                    icon="cog-6-tooth" 
-                    icon:variant="outline" />
-                </flux:tooltip>
-                @endrole --}}
 
                 @isset($buttons)
                     <flux:separator vertical class="my-2" />
