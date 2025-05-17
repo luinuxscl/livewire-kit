@@ -14,14 +14,14 @@ Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth', 'verified'])->group(function () {
     Volt::route('settings/profile', 'settings.profile')->name('settings.profile');
     Volt::route('settings/password', 'settings.password')->name('settings.password');
     Volt::route('settings/appearance', 'settings.appearance')->name('settings.appearance');
 });
 
 // Rutas solo para autenticados y con roles admin o root, con prefix admin
-Route::middleware(['auth', 'role:admin|root'])->prefix('admin')->group(function () {
+Route::middleware(['auth', 'verified', 'role:admin|root'])->prefix('admin')->group(function () {
     Route::get('users', [UserController::class, 'index'])->name('admin.users.index');
     Route::get('users/{user}', [UserController::class, 'show'])->name('admin.users.show');
     Route::get('users/{user}/edit', [UserController::class, 'edit'])->name('admin.users.edit');

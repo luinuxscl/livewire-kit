@@ -286,6 +286,15 @@
     "Enter your email and password below to log in": "Ingresa tu correo y contraseña para iniciar sesión",
     "Email address": "Correo electrónico",
     "Don't have an account?": "¿No tienes una cuenta?",
+    "Hello!": "¡Hola!",
+    "Hello": "Hola",
+    "Welcome!": "¡Bienvenido!",
+    "Regards": "Saludos",
+    "If you're having trouble clicking the \":actionText\" button, copy and paste the URL below\ninto your web browser:": "Si tienes problemas para hacer clic en el botón \":actionText\", copia y pega la URL a continuación\nen tu navegador web:",
+    "All rights reserved.": "Todos los derechos reservados.",
+    "Verify Email Address": "Verificar dirección de correo electrónico",
+    "Please click the button below to verify your email address.": "Por favor, haz clic en el botón de abajo para verificar tu dirección de correo electrónico.",
+    "If you did not create an account, no further action is required.": "Si no creaste una cuenta, no es necesario realizar ninguna otra acción.",
     "Sign up": "Registrarse",
     "actions": "acciones",
     "Here you can manage the users of the platform.": "Aquí puedes gestionar los usuarios de la plataforma.",
@@ -320,5 +329,8 @@
     "Option not found": "Opción no encontrada",
     "Change the value of this option": "Cambia el valor de esta opción",
     "Save changes": "Guardar cambios",
-    "No changes": "Sin cambios"
+    "No changes": "Sin cambios",
+    "Resend verification email": "Reenviar correo de verificación",
+    "Log out": "Cerrar sesión",
+    "A new verification link has been sent to the email address you provided during registration.": "Se ha enviado un nuevo enlace de verificación a la dirección de correo electrónica que proporcionaste durante el registro."
 }

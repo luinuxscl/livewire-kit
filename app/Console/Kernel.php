@@ -17,6 +17,7 @@ class Kernel extends ConsoleKernel
         Commands\ListUsersByRole::class,
         Commands\BackupDatabase::class,
         Commands\ListDatabaseBackups::class,
+        Commands\TestEmailVerification::class,
     ];
 
     /**
