@@ -309,7 +309,6 @@
     "An admin cannot demote a root user.": "Un admin no puede degradar a un usuario root.",
     "You cannot demote your own root user.": "No puedes degradar tu propio usuario root.",
     "Go to Roles": "Ir a Roles",
-    "All rights reserved.": "Todos los derechos reservados.",
     "Under development": "En desarrollo",
     "First Name": "Nombre",
     "Last Name": "Apellido",
