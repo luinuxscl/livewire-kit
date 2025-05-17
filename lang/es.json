@@ -331,5 +331,7 @@
     "No changes": "Sin cambios",
     "Resend verification email": "Reenviar correo de verificación",
     "Log out": "Cerrar sesión",
-    "A new verification link has been sent to the email address you provided during registration.": "Se ha enviado un nuevo enlace de verificación a la dirección de correo electrónica que proporcionaste durante el registro."
+    "A new verification link has been sent to the email address you provided during registration.": "Se ha enviado un nuevo enlace de verificación a la dirección de correo electrónica que proporcionaste durante el registro.",
+    "Please verify your email address by clicking on the link we just emailed to you.": "Por favor, verifica tu dirección de correo electrónica haciendo clic en el enlace que acabamos de enviar a ti por correo electrónico.",
+    "Regards,": "Atentamente,"
 }
