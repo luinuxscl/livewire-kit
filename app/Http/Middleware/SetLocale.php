@@ -12,7 +12,6 @@ class SetLocale
     public function handle($request, Closure $next)
     {
         $locale = $request->cookie('locale', session('locale', config('app.locale')));
-        \Log::info('SetLocale middleware: Locale usado = ' . $locale);
         app()->setLocale($locale);
         return $next($request);
     }
