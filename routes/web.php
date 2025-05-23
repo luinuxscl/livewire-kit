@@ -35,6 +35,8 @@ Route::middleware(['auth', 'verified', 'role:admin|root'])->prefix('admin')->gro
 // Página estática: About
 use App\Http\Controllers\PageController;
 
-Route::get('about', fn() => app(\App\Http\Controllers\PageController::class)->show('about'))->name('about');
+Route::get('about', fn() => app(\App\Http\Controllers\PageController::class)->show('about'))
+->middleware(['auth'])
+->name('about');
 
 require __DIR__ . '/auth.php';
