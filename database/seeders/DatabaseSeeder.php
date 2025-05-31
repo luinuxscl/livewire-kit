@@ -18,6 +18,8 @@ class DatabaseSeeder extends Seeder
             RoleSeeder::class,
             UserSeeder::class,
             OptionsTableSeeder::class,
+            TestUserWithApiTokenSeeder::class, // Seeder para usuario con token API de prueba
+
         ]);
     }
 }

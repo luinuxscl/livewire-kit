@@ -12,6 +12,7 @@ class UserSeeder extends Seeder
     {
         if (!app()->isProduction()) {
             $password = Hash::make('password');
+            $now = now();
 
             $users = [
                 [
@@ -98,6 +99,7 @@ class UserSeeder extends Seeder
                     [
                         'name' => $userData['first_name'] . ' ' . $userData['last_name'],
                         'password' => $password,
+                        'email_verified_at' => $now,
                     ]
                 );
 
