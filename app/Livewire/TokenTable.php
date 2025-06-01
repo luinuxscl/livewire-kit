@@ -14,6 +14,9 @@ use PowerComponents\LivewirePowerGrid\PowerGridComponent;
 
 final class TokenTable extends PowerGridComponent
 {
+    protected $listeners = [
+        'tokenTableRefresh' => '$refresh',
+    ];
     public string $tableName = 'token-table-zyq9l8-table';
 
     public function setUp(): array

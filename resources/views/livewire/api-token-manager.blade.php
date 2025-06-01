@@ -53,9 +53,17 @@
         @endif
 
     <div>
-        <livewire:token-table/>
-        <flux:button icon="trash" wire:click="revokeAll" variant="danger" class="btn mt-4">
-            {{ __('Revoke All') }}
-        </flux:button>
+        @if($tokens && count($tokens) > 0)
+            <livewire:token-table wire:key="token-table-{{ now()->timestamp }}" />
+            <flux:button icon="trash" wire:click="revokeAll" variant="danger" class="btn mt-4">
+                {{ __('Revoke All') }}
+            </flux:button>
+        @endif
+
+        <script>
+            document.addEventListener('livewire:tokenTableRefresh', function () {
+                Livewire.find(document.querySelector('[wire\:key^=token-table]').getAttribute('wire:id')).$refresh();
+            });
+        </script>
     </div>
 </div>

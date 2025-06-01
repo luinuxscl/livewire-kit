@@ -7,6 +7,9 @@ use Illuminate\Support\Facades\Auth;
 
 class ApiTokenManager extends Component
 {
+    protected $listeners = [
+        'revokeToken',
+    ];
 
     public $tokens;
     public $device_name;
@@ -48,6 +51,7 @@ class ApiTokenManager extends Component
         Auth::user()->tokens()->where('id', $id)->delete();
         $this->loadTokens();
         $this->dispatch('notify', type: 'warning', message: 'Token revocado.');
+        $this->dispatch('tokenTableRefresh')->to('token-table');
     }
 
     public function revokeAll()
@@ -55,6 +59,12 @@ class ApiTokenManager extends Component
         Auth::user()->tokens()->delete();
         $this->loadTokens();
         $this->dispatch('notify', type: 'warning', message: 'Todos los tokens revocados.');
+        $this->dispatch('tokenTableRefresh')->to('token-table');
+    }
+
+    public function revokeToken($id)
+    {
+        $this->revoke($id);
     }
 
     public function render()
