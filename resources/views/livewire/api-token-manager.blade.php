@@ -1,4 +1,4 @@
-<div class="space-y-6 p-4">
+<div>
     <div
         x-data="{ show: false, message: '', type: 'success', timeout: null }"
         x-on:notify.window="
@@ -16,29 +16,49 @@
             </div>
         </template>
     </div>
-    <x-ui.card title="{{ __('Manage API Tokens') }}">
-        <div class="space-y-4">
-            <div>
-                <flux:input.group>
-                    <flux:input placeholder="{{ __('Device Name') }}" wire:model.defer="device_name" />
-                    <flux:button icon="plus" wire:click="generateToken">{{ __('Generate Token') }}</flux:button>
-                </flux:input.group>
-            </div>
-            @if( isset($plainTextToken) )
-                <div class="flex flex-col gap-2">
-                    <flux:label>{{ __('New token generated:') }}</flux:label>
-                    <flux:input icon="key" value="{{ $plainTextToken }}" readonly copyable />
-                </div>
-            @endif
-        </div>
-    </x-ui.card>
 
-    <x-ui.card title="{{ __('Existing Tokens') }}">
-        <table class="w-full table-auto border-collapse border border-gray-200">
-            <thead class="bg-gray-50">
+    @if( isset($plainTextToken) )
+            <div class="flex flex-col gap-2 mb-6">
+                <flux:label>{{ __('New token generated:') }}</flux:label>
+                <flux:input icon="key" value="{{ $plainTextToken }}" readonly copyable />
+            </div>
+        @else
+        <div class="flex flex-col gap-4 mb-6" >
+            <div>
+                <flux:field>
+                    <flux:label>{{ __('Token Name') }}</flux:label>
+                    <flux:input wire:model.defer="device_name" :placeholder="__('Unique name for this token')" />
+                </flux:field>
+            </div>
+    
+            <div>
+                <flux:label for="expiration">{{ __('Expiration') }}</flux:label>
+                <flux:select wire:model="expiration" 
+                placeholder="Choose expiration..."
+                class="mt-2">
+                    <flux:select.option value="7">7 days</flux:select.option>
+                    <flux:select.option value="30" selected>30 days</flux:select.option>
+                    <flux:select.option value="60">60 days</flux:select.option>
+                    <flux:select.option value="90">90 days</flux:select.option>
+                    <flux:select.option value="365">365 days</flux:select.option>
+                </flux:select>
+            </div>
+            <div>
+                <flux:button wire:click="generateToken" class="btn btn-success">
+                    {{ __('Generate Token') }}
+                </flux:button>
+            </div>
+        </div>
+       
+        @endif
+
+    <div>
+        <table class="w-full table-auto border-collapse border border-gray-200 mb-4">
+            <thead class="bg-gray-50 dark:bg-gray-800">
                 <tr>
                     <th class="border px-4 py-2 text-left">{{ __('Name') }}</th>
                     <th class="border px-4 py-2 text-left">{{ __('Created At') }}</th>
+                    <th class="border px-4 py-2 text-left">{{ __('Expiration') }}</th>
                     <th class="border px-4 py-2 text-left">{{ __('Actions') }}</th>
                 </tr>
             </thead>
@@ -46,9 +66,26 @@
                 @forelse($tokens as $token)
                     <tr wire:key="token-{{ $token->id }}">
                         <td class="border px-4 py-2">{{ $token->name }}</td>
-                        <td class="border px-4 py-2">{{ $token->created_at->format('Y-m-d H:i') }}</td>
+                        <td class="border px-4 py-2">{{ $token->created_at->format('d-m-Y H:i') }}</td>
                         <td class="border px-4 py-2">
-                            <button wire:click="revoke({{ $token->id }})" class="text-red-600 hover:text-red-800 text-sm">{{ __('Revoke') }}</button>
+    @if($token->expires_at)
+        @php
+            $expires = \Carbon\Carbon::parse($token->expires_at);
+            $diff = now()->startOfDay()->diffInDays($expires->startOfDay(), false);
+        @endphp
+        @if($diff > 0)
+            {{ $diff }} {{ __('days') }}
+        @elseif($diff === 0)
+            {{ __('Expires today') }}
+        @else
+            <span class="text-red-600">{{ __('Expired') }}</span>
+        @endif
+    @else
+        -
+    @endif
+</td>
+                        <td class="border px-4 py-2 text-center">
+                            <flux:button icon="trash" variant="danger" size="xs" wire:click="revoke({{ $token->id }})" />
                         </td>
                     </tr>
                 @empty
@@ -58,6 +95,8 @@
                 @endforelse
             </tbody>
         </table>
-        <button wire:click="revokeAll" class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded">{{ __('Revoke All') }}</button>
-    </x-ui.card>
+        <flux:button icon="trash" wire:click="revokeAll" variant="danger" class="btn">
+            {{ __('Revoke All') }}
+        </flux:button>
+    </div>
 </div>

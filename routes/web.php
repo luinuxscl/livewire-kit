@@ -18,7 +18,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Volt::route('settings/profile', 'settings.profile')->name('settings.profile');
     Volt::route('settings/password', 'settings.password')->name('settings.password');
     Volt::route('settings/appearance', 'settings.appearance')->name('settings.appearance');
-    Route::view('settings/api-tokens', 'settings.api-tokens')->name('settings.api-tokens');
+    // Route::view('settings/api-tokens', 'settings.api-tokens')->name('settings.api-tokens');
+    Volt::route('settings/api-tokens', 'settings.api-token')->name('settings.api-token');
 });
 
 // Rutas solo para autenticados y con roles admin o root, con prefix admin
