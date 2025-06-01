@@ -43,14 +43,15 @@ class ApiTokenManager extends Component
         $this->device_name = '';
         $this->expiration = 30;
         $this->loadTokens();
-        $this->dispatch('notify', type: 'success', message: 'Token generado.');
+        $this->dispatch('showToast', type: 'success', message: 'Generated token successfully');
+        \Flux::modal('token-generated')->show();
     }
 
     public function revoke($id)
     {
         Auth::user()->tokens()->where('id', $id)->delete();
         $this->loadTokens();
-        $this->dispatch('notify', type: 'warning', message: 'Token revocado.');
+        $this->dispatch('showToast', type: 'success', message: 'Token revoked successfully');
         $this->dispatch('tokenTableRefresh')->to('token-table');
     }
 
@@ -58,13 +59,18 @@ class ApiTokenManager extends Component
     {
         Auth::user()->tokens()->delete();
         $this->loadTokens();
-        $this->dispatch('notify', type: 'warning', message: 'Todos los tokens revocados.');
+        $this->dispatch('showToast', type: 'warning', message: 'All tokens revoked successfully');
         $this->dispatch('tokenTableRefresh')->to('token-table');
     }
 
     public function revokeToken($id)
     {
         $this->revoke($id);
+    }
+
+    public function closeTokenModal()
+    {
+        $this->plainTextToken = null;
     }
 
     public function render()

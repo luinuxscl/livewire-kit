@@ -343,5 +343,6 @@
     "Expires today": "Expira hoy",
     "Expired": "Expirado",
     "Expiration": "Expiración",
-    "Manage your API tokens": "Administra tus API Tokens"
+    "Manage your API tokens": "Administra tus API Tokens",
+    "New Token": "Nuevo Token"
 }
