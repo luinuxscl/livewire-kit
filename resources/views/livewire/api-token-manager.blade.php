@@ -53,49 +53,8 @@
         @endif
 
     <div>
-        <table class="w-full table-auto border-collapse border border-gray-200 mb-4">
-            <thead class="bg-gray-50 dark:bg-gray-800">
-                <tr>
-                    <th class="border px-4 py-2 text-left">{{ __('Name') }}</th>
-                    <th class="border px-4 py-2 text-left">{{ __('Created At') }}</th>
-                    <th class="border px-4 py-2 text-left">{{ __('Expiration') }}</th>
-                    <th class="border px-4 py-2 text-left">{{ __('Actions') }}</th>
-                </tr>
-            </thead>
-            <tbody>
-                @forelse($tokens as $token)
-                    <tr wire:key="token-{{ $token->id }}">
-                        <td class="border px-4 py-2">{{ $token->name }}</td>
-                        <td class="border px-4 py-2">{{ $token->created_at->format('d-m-Y H:i') }}</td>
-                        <td class="border px-4 py-2">
-    @if($token->expires_at)
-        @php
-            $expires = \Carbon\Carbon::parse($token->expires_at);
-            $diff = now()->startOfDay()->diffInDays($expires->startOfDay(), false);
-        @endphp
-        @if($diff > 0)
-            {{ $diff }} {{ __('days') }}
-        @elseif($diff === 0)
-            {{ __('Expires today') }}
-        @else
-            <span class="text-red-600">{{ __('Expired') }}</span>
-        @endif
-    @else
-        -
-    @endif
-</td>
-                        <td class="border px-4 py-2 text-center">
-                            <flux:button icon="trash" variant="danger" size="xs" wire:click="revoke({{ $token->id }})" />
-                        </td>
-                    </tr>
-                @empty
-                    <tr>
-                        <td colspan="3" class="border px-4 py-2 text-center">{{ __('No API tokens.') }}</td>
-                    </tr>
-                @endforelse
-            </tbody>
-        </table>
-        <flux:button icon="trash" wire:click="revokeAll" variant="danger" class="btn">
+        <livewire:token-table/>
+        <flux:button icon="trash" wire:click="revokeAll" variant="danger" class="btn mt-4">
             {{ __('Revoke All') }}
         </flux:button>
     </div>
