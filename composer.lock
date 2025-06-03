@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f46712094e9406eef28de9ccfcd05ae4",
+    "content-hash": "489b61675c0da727a2bb304fc6ee084e",
     "packages": [
         {
             "name": "brick/math",
@@ -2280,6 +2280,49 @@
                 "source": "https://github.com/livewire/volt"
             },
             "time": "2025-04-08T15:13:36+00:00"
+        },
+        {
+            "name": "luinuxscl/prompts",
+            "version": "dev-main",
+            "dist": {
+                "type": "path",
+                "url": "../packages/luinuxscl/prompts",
+                "reference": "3f9c043e9e662cb2437ccf5ecabe240b71f8d4f3"
+            },
+            "require": {
+                "illuminate/support": "^9.0|^10.0|^11.0|^12.0",
+                "php": "^8.2"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Luinuxscl\\Prompts\\PromptsServiceProvider"
+                    ],
+                    "aliases": {
+                        "Prompts": "Luinuxscl\\Prompts\\Facades\\Prompts"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Luinuxscl\\Prompts\\": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "LuinuxSCL",
+                    "email": "info@luinuxscl.com"
+                }
+            ],
+            "description": "Un paquete Laravel minimalista para gestionar y anidar prompts de texto",
+            "transport-options": {
+                "symlink": true,
+                "relative": true
+            }
         },
         {
             "name": "monolog/monolog",
@@ -9443,8 +9486,10 @@
         }
     ],
     "aliases": [],
-    "minimum-stability": "stable",
-    "stability-flags": {},
+    "minimum-stability": "dev",
+    "stability-flags": {
+        "luinuxscl/prompts": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
