@@ -1,6 +1,7 @@
 @import 'tailwindcss';
 @import '../../vendor/livewire/flux/dist/flux.css';
 @import '../../vendor/power-components/livewire-powergrid/resources/css/tailwind4.css';
+@import './steps.css';
 
 @source '../views';
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
@@ -13,6 +14,7 @@
 @source '../../app/Livewire/**/*Table.php';
 @source '../../vendor/power-components/livewire-powergrid/src/Themes/Tailwind.php';
 @source '../../vendor/power-components/livewire-powergrid/resources/views/**/*.php';
+
 
 @layer theme {
     .dark {
@@ -69,7 +71,7 @@
     --color-warning-700: oklch(0.555 0.163 48.998);
     --color-warning-800: oklch(0.473 0.137 46.201);
     --color-warning-950: oklch(0.279 0.077 45.635);
-    
+
     --color-danger-50: oklch(0.971 0.013 17.38);
     --color-danger-200: oklch(0.885 0.062 18.334);
     --color-danger-300: oklch(0.808 0.114 19.571);
@@ -91,24 +93,23 @@
     --color-danger: var(--color-danger-600);
 }
 
-.btn{
+.btn {
     @apply cursor-pointer;
 }
 
-.btn-success{
-    @apply 
-    border-success text-success-50 bg-success hover:bg-success-500;
+.btn-success {
+    @apply border-success text-success-50 bg-success hover:bg-success-500;
 }
 
-.btn-info{
+.btn-info {
     @apply border-info text-info-50 bg-info hover:bg-info-500;
 }
 
-.btn-warning{
+.btn-warning {
     @apply border-warning text-warning-50 bg-warning hover:bg-warning-500;
 }
 
-.btn-danger{
+.btn-danger {
     @apply border-danger text-danger-50 bg-danger hover:bg-danger-500;
 }
 

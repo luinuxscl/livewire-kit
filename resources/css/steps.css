@@ -1,0 +1,16 @@
+/* Steps component minimal CSS (solo para detalles que Tailwind no cubre) */
+
+.step-small .step-circle {
+    width: 1.5rem;
+    height: 1.5rem;
+    font-size: 0.75rem;
+}
+.step-small .step-line {
+    height: 1rem;
+}
+.step-small .step-content {
+    padding-bottom: 1rem;
+}
+.step-small .step-text {
+    font-size: 0.875rem;
+}
