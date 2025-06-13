@@ -14,6 +14,16 @@ use App\Models\Profile;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
+    use HasApiTokens, HasFactory, Notifiable, HasRoles;
+
+    /**
+     * Obtiene todas las estadísticas de uso de LLM para el usuario.
+     */
+    public function usageStatistics(): \Illuminate\Database\Eloquent\Relations\MorphMany
+    {
+        return $this->morphMany(\App\Models\LlmUsageStatistic::class, 'usable');
+    }
+
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasApiTokens, HasFactory, Notifiable, HasRoles;
 

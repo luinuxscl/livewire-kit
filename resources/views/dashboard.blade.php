@@ -17,9 +17,8 @@ icon="layout-grid">
 
 {{-- <livewire:content-profile-table/> --}}
 
-<x-test />
+{{-- <x-test /> --}}
 
-{{-- <livewire:prompt-press.content-seed-chat-form 
-    :webhook-url="'https://likeplatform-n8n.lwroij.easypanel.host/webhook/f724468b-8e74-445b-a3f4-50259bc28076'" /> --}}
+<livewire:prompt-press.content-seed-chat-form />
     
 </x-layouts.likeplatform>

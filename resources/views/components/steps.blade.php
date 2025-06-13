@@ -22,13 +22,21 @@
         <div class="flex items-stretch">
             <div class="flex flex-col items-center mr-4 mt-0">
                 <div class="step-circle
-                    @if($isCompleted) bg-green-600 text-white @elseif($isActive) bg-blue-600 text-white @else bg-gray-300 text-gray-500 dark:bg-gray-700 dark:text-gray-400 @endif
+                    @if($isCompleted) 
+                        bg-green-600 text-white 
+                    @elseif($isActive) 
+                        bg-blue-600 text-white 
+                    @else 
+                        bg-gray-300 text-gray-500 dark:bg-gray-700 dark:text-gray-400 
+                    @endif
                     flex items-center justify-center font-semibold
                     {{ $size === 'small' ? '' : 'w-8 h-8 text-sm' }}
                     z-10
                 ">
-                    @if($isCompleted)
-                        ✓
+                    @if(isset($step['icon']) && $step['icon'])
+                        <flux:icon :icon="$step['icon']" variant="micro" />
+                    @elseif($isCompleted)
+                        <flux:icon.check variant="micro" />
                     @else
                         {{ $stepNum }}
                     @endif
@@ -41,7 +49,7 @@
                     "></div>
                 @endif
             </div>
-            <div class="step-content flex flex-col justify-center {{ $size === 'small' ? '' : 'pb-6' }}">
+            <div class="step-content flex flex-col justify-center {{ $size === 'small' ? '' : ($stepNum === $count ? 'pb-0' : 'pb-6') }}">
                 <span class="step-text font-medium
                     @if($isCompleted || $isActive) text-gray-900 dark:text-gray-100 @else text-gray-500 dark:text-gray-300 @endif
                     {{ $size === 'small' ? '' : '' }}

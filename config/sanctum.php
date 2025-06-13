@@ -27,10 +27,10 @@ return [
     | Sanctum Guards
     |--------------------------------------------------------------------------
     |
-    | This array contains the authentication guards that will be checked when
-    | Sanctum is trying to authenticate a request. If none of these guards
-    | are able to authenticate the request, Sanctum will use the bearer
-    | token that's present on an incoming request for authentication.
+    | Este array contiene los Guards de autenticación que serán verificados cuando
+    | Sanctum intente autenticar una solicitud. Si ninguno de estos guardias
+    | puede autenticar la solicitud, Sanctum utilizará el token bearer
+    | que está presente en una solicitud entrante para la autenticación.
     |
     */
 
@@ -41,9 +41,9 @@ return [
     | Expiration Minutes
     |--------------------------------------------------------------------------
     |
-    | This value controls the number of minutes until an issued token will be
-    | considered expired. This will override any values set in the token's
-    | "expires_at" attribute, but first-party sessions are not affected.
+    | Este valor controla el número de minutos hasta que un token emitido se
+    | considerará expirado. Esto anulará cualquier valor establecido en el atributo
+    | "expires_at" del token, pero las sesiones de primera parte no se ven afectadas.
     |
     */
 
@@ -54,11 +54,11 @@ return [
     | Token Prefix
     |--------------------------------------------------------------------------
     |
-    | Sanctum can prefix new tokens in order to take advantage of numerous
-    | security scanning initiatives maintained by open source platforms
-    | that notify developers if they commit tokens into repositories.
+    | Sanctum puede prefijar nuevos tokens para aprovechar numerosos
+    | iniciativas de escaneo de seguridad mantenidas por plataformas de código abierto
+    | que notifican a los desarrolladores si cometen tokens en repositorios.
     |
-    | See: https://docs.github.com/en/code-security/secret-scanning/about-secret-scanning
+    | Ver: https://docs.github.com/en/code-security/secret-scanning/about-secret-scanning
     |
     */
 
@@ -66,12 +66,13 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Sanctum Middleware
+    | Middleware de Sanctum
     |--------------------------------------------------------------------------
     |
-    | When authenticating your first-party SPA with Sanctum you may need to
-    | customize some of the middleware Sanctum uses while processing the
-    | request. You may change the middleware listed below as required.
+    | Cuando autenticas tu primera parte SPA con Sanctum, puedes necesitar
+    | personalizar algunos de los middleware que Sanctum utiliza mientras
+    | procesa la solicitud. Puedes cambiar el middleware listado a continuación
+    | según sea necesario.
     |
     */
 
