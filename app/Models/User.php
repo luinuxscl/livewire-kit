@@ -11,9 +11,11 @@ use Illuminate\Support\Str;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 use App\Models\Profile;
+use App\Models\LlmUsageStatistic;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
+    /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasApiTokens, HasFactory, Notifiable, HasRoles;
 
     /**
@@ -21,11 +23,8 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     public function usageStatistics(): \Illuminate\Database\Eloquent\Relations\MorphMany
     {
-        return $this->morphMany(\App\Models\LlmUsageStatistic::class, 'usable');
+        return $this->morphMany(LlmUsageStatistic::class, 'usable');
     }
-
-    /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasApiTokens, HasFactory, Notifiable, HasRoles;
 
     /**
      * The attributes that are mass assignable.

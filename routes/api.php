@@ -23,5 +23,8 @@ Route::middleware('auth:sanctum')->group(function () {
     // Endpoint de prueba para test con token
     Route::get('/test-api', [\App\Http\Controllers\TestApiController::class, 'test']);
 
+    // Rutas de estadísticas de uso de LLM
+    Route::post('/llm-usage', [\App\Http\Controllers\Api\V1\LlmUsageController::class, 'store']);
+
     // Otras rutas protegidas...
 });
