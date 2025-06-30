@@ -344,5 +344,8 @@
     "Expired": "Expirado",
     "Expiration": "Expiración",
     "Manage your API tokens": "Administra tus API Tokens",
-    "New Token": "Nuevo Token"
+    "New Token": "Nuevo Token",
+    "draft": "borrador",
+    "production": "producción",
+    "configured": "configurado"
 }

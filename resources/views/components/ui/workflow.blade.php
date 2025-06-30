@@ -2,7 +2,8 @@
     'title' => null,
     'description' => null,
     'actions' => null,
-    'active' => true,
+    'active' => false,
+    'status' => 'draft',
 ])
 
 <div
@@ -18,9 +19,13 @@
                             :color="$active ? 'green' : 'gray'" />
 
                     </div>
-                    @if ($description)
-                        <flux:text variant="subtle">{{ $description }}</flux:text>
-                    @endif
+                    <div class="flex items-center space-x-2 mt-1">
+                        <x-ui.workflow-badge-status :status="$status" />
+                        @if ($description)
+                            <flux:text variant="subtle">{{ $description }}</flux:text>
+                        @endif
+                    </div>
+
                 </div>
             </div>
 

@@ -118,6 +118,10 @@
     @apply border-danger text-danger-50 bg-danger hover:bg-danger-500;
 }
 
+.btn-muted {
+    @apply border-gray-500 text-gray-50 bg-gray-500 hover:bg-gray-600;
+}
+
 @layer theme {
     .dark {
         --color-accent: var(--color-white);
