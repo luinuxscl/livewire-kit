@@ -1,5 +1,5 @@
 @props([
-    'type' => 'success',
+    'type' => 'alert-success',
     'icon' => null,
     'role' => 'alert',
     'title' => null,
@@ -9,17 +9,17 @@
 @php
     if (!$icon) {
         $icon = match ($type) {
-            'info' => 'info',
-            'danger' => 'exclamation-triangle',
-            'success' => 'check-circle',
-            'warning' => 'exclamation-circle',
-            'dark' => 'question-circle',
+            'alert-info' => 'info',
+            'alert-error' => 'exclamation-triangle',
+            'alert-success' => 'check-circle',
+            'alert-warning' => 'exclamation-circle',
+            'alert-dark' => 'question-circle',
             default => 'bell',
         };
     }
 @endphp
 
-<div role="alert" class="alert alert-{{ $type }}">
+<div role="alert" class="alert {{ $type }}">
     <flux:icon name="{{ $icon }}" class="flex-shrink-0 w-5 h-5 mr-3" aria-hidden="true"></flux:icon>
     <span>
         @if ($title)
