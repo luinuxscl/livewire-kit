@@ -19,6 +19,7 @@
         "luinuxscl/promptpress": "dev-develop",
         "luinuxscl/prompts": "dev-main",
         "power-components/livewire-powergrid": "^6.3",
+        "spatie/laravel-markdown": "^2.7",
         "spatie/laravel-permission": "^6.17"
     },
     "require-dev": {
