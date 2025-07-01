@@ -5,6 +5,8 @@ use Livewire\Volt\Volt;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CustomizationController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\PageController;
+use App\Http\Controllers\PlaygroundController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -29,15 +31,13 @@ Route::middleware(['auth', 'verified', 'role:admin|root'])->prefix('admin')->gro
     Route::get('users/{user}/edit', [UserController::class, 'edit'])->name('admin.users.edit');
     Route::view('roles', 'admin.roles.index')->name('admin.roles.index');
 
-    Route::get('playground', \App\Http\Controllers\PlaygroundController::class)->name('playground');
-
+    Route::get('playground', PlaygroundController::class)->name('playground');
+    Route::get('/playground/prompts', [PageController::class, 'prompts'])->name('prompts');
     Route::get('/customization', CustomizationController::class)->name('customization');
 });
 
 // Página estática: About
-use App\Http\Controllers\PageController;
-
-Route::get('about', fn() => app(\App\Http\Controllers\PageController::class)->show('about'))
+Route::get('about', fn() => app(PageController::class)->show('about'))
 ->middleware(['auth'])
 ->name('about');
 

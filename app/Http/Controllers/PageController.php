@@ -22,4 +22,9 @@ class PageController extends Controller
         }
         return view('pages.' . $page);
     }
+
+    public function prompts(): View
+    {
+        return view('playground.prompts');
+    }
 }
