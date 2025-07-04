@@ -16,8 +16,6 @@
         "laravel/tinker": "^2.10.1",
         "livewire/flux": "^2.1.1",
         "livewire/volt": "^1.7.0",
-        "luinuxscl/promptpress": "dev-develop",
-        "luinuxscl/prompts": "dev-main",
         "power-components/livewire-powergrid": "^6.3",
         "spatie/laravel-markdown": "^2.7",
         "spatie/laravel-permission": "^6.17"
@@ -83,22 +81,6 @@
             "php-http/discovery": true
         }
     },
-    "repositories": [
-        {
-            "type": "path",
-            "url": "../packages/luinuxscl/*",
-            "options": {
-                "symlink": true
-            }
-        },
-        {
-            "type": "path",
-            "url": "../packages/*",
-            "options": {
-                "symlink": true
-            }
-        }
-    ],
     "minimum-stability": "dev",
     "prefer-stable": true
 }
