@@ -95,6 +95,26 @@ Accede a la app en: http://localhost:8000
 
 ---
 
+## 🔄 Versionado
+
+Este proyecto sigue [Versionado Semántico 2.0.0](https://semver.org/lang/es/). Para ver las versiones disponibles, mira los [tags en este repositorio](https://github.com/luinuxscl/livewire-kit/tags).
+
+### Estructura de versionado
+
+Dado un número de versión MAYOR.MENOR.PARCHE, incrementar:
+
+1. **MAYOR** cuando hay cambios incompatibles en la API.
+2. **MENOR** cuando se añade funcionalidad de forma retrocompatible.
+3. **PARCHE** cuando se corrigen errores de forma retrocompatible.
+
+### Changelog
+
+Los cambios detallados para cada versión se documentan en el archivo [CHANGELOG.md](CHANGELOG.md).
+
+## 📄 Licencia
+
+Este proyecto está bajo la Licencia MIT - ver el archivo [LICENSE](LICENSE) para más detalles.
+
 ## 👤 Autor
 
 -   **Luis Sepulveda** — [luinuxscl](https://github.com/luinuxscl) — luis@like.cl — [like.cl](https://like.cl)
