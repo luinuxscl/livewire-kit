@@ -1,53 +1,100 @@
 # LikePlatform
 
-Starterkit para Laravel 12 con Livewire
+**Starterkit para Laravel 12 + Livewire + FluxUI Essentials**
 
-LikePlatform es una base moderna para iniciar proyectos en Laravel 12 usando Livewire, diseñada para acelerar el desarrollo y mantener buenas prácticas desde el inicio.
+LikePlatform es una base moderna para iniciar proyectos en Laravel 12, integrando Livewire y FluxUI (solo componentes Essentials), DaisyUI y TailwindCSS, diseñada para acelerar el desarrollo, mantener buenas prácticas y ofrecer una experiencia de usuario avanzada desde el inicio.
 
-## Instalación Rápida
+---
+
+## 🚀 Instalación Rápida
 
 ```bash
 git clone https://github.com/luinuxscl/livewire-kit.git
 cd livewire-kit
+composer config --global --auth github-oauth.github.com TU_TOKEN
 composer install
 npm install && npm run dev
 cp .env.example .env
 php artisan key:generate
 php artisan migrate
+php artisan likeplatform:install
 composer run dev
 ```
 
 Accede a la app en: http://localhost:8000
 
-## Documentación
+---
 
-Encuentra la documentación completa en [`/docs`](./docs).
+## 📦 Características Principales
 
-## Personalización de la Aplicación
-La aplicación permite personalizar varios aspectos desde Livewire en la ruta `/settings/customization`:
+-   **Livewire + FluxUI Essentials**: Interfaz reactiva y moderna solo usando componentes gratuitos de FluxUI.
+-   **Gestión avanzada de posts**: Interfaz de dos columnas para visualizar y editar posts de forma eficiente.
+-   **Sistema de notificaciones toast** reutilizable en toda la app (éxito, error, info, etc.).
+-   **Auditoría de acciones sensibles**: Registro de logs de usuario y acciones críticas.
+-   **Personalización centralizada**: Configura branding, idioma, zona horaria y más desde la interfaz.
+-   **Comandos Artisan personalizados**: Todos los comandos propios usan el prefijo `likeplatform:` (ubicados en `app/Console/Commands`).
+-   **Buenas prácticas y convenciones Laravel**: Código limpio, mantenible y alineado a PSR-12/PSR-4.
 
-### Keys disponibles
-| Key                  | Descripción                                  | Grupo         | Tipo    |
-|----------------------|----------------------------------------------|---------------|---------|
-| site_logo_light      | URL del logo en modo claro                   | branding      | string  |
-| site_logo_dark       | URL del logo en modo oscuro                  | branding      | string  |
-| site_title           | Título del sitio                             | general       | string  |
-| site_description     | Descripción corta del sitio                  | general       | text    |
-| site_icon            | URL del icono del sitio                      | branding      | string  |
-| contact_email        | Correo de contacto                           | general       | string  |
-| default_locale       | Idioma predeterminado                        | localization  | string  |
-| default_timezone     | Zona horaria predeterminada                  | localization  | string  |
-| registration_enabled | Indica si el registro de usuarios está activo| general       | boolean |
+---
 
-### Ejemplo de uso en layouts
-```blade
-<img src="{{ \App\Models\Option::getValue('site_logo_light') }}" alt="Logo Claro">
-<title>{{ \App\Models\Option::getValue('site_title') }}</title>
-```
+## 🛠️ Requisitos
 
-### Formatos de archivo
-- **Logos**: JPG, PNG o SVG; tamaño máximo 1 MB; tamaño recomendado: 200×50 px.
+-   PHP >= 8.2
+-   Node.js >= 18
+-   Composer >= 2.0
+-   MySQL/MariaDB o SQLite
 
-## Autor
+---
+
+## 🖥️ Estructura y Arquitectura
+
+-   **Livewire** para componentes interactivos.
+-   **FluxUI Essentials** para UI (no se usan componentes Advanced).
+-   **DaisyUI** para el diseño y utilidades.
+-   **Comandos Artisan propios** con prefijo `likeplatform:`.
+-   **Organización clara** de servicios, acciones y recursos siguiendo las convenciones de Laravel.
+
+---
+
+## 📝 Funcionalidades Destacadas
+
+### Notificaciones Toast Globales
+
+-   Sistema Livewire + FluxUI para mostrar mensajes de éxito, error, info, etc., desde cualquier componente.
+
+### Auditoría de Acciones
+
+-   Registro de acciones sensibles por usuario, con fecha y tipo de acción.
+-   Interfaz para revisar historial de auditoría.
+
+### Comandos Artisan Personalizados
+
+-   Todos los comandos propios usan el prefijo `likeplatform:`.
+-   Ubicados en `app/Console/Commands`.
+-   Ejemplo:
+    ```bash
+    php artisan likeplatform:your-command
+    ```
+
+---
+
+## 🧑‍💻 Buenas Prácticas y Convenciones
+
+-   Código en inglés, comentarios relevantes en español.
+-   Respeto a PSR-12/PSR-4 y convenciones de Laravel.
+-   Uso exclusivo de componentes Essentials de FluxUI.
+-   Documentación de lógica compleja y decisiones arquitectónicas.
+-   Organización clara de servicios, acciones y recursos.
+
+---
+
+## 📚 Documentación Adicional
+
+-   Documentación extendida en [`/docs`](./docs).
+-   Ejemplos de uso de FluxUI Essentials y modales en `/docs/ui-examples.md`.
+
+---
+
+## 👤 Autor
 
 -   **Luis Sepulveda** — [luinuxscl](https://github.com/luinuxscl) — luis@like.cl — [like.cl](https://like.cl)
