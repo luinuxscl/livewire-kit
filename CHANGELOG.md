@@ -4,6 +4,8 @@ Todas las modificaciones importantes del proyecto se documentarán en este archi
 
 ## [Unreleased]
 
+## [1.1.2] - 2025-07-05
+
 ### Added
 - Sistema de notificaciones toast reutilizable
 - Sistema de auditoría de acciones
