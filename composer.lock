@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4324fdf01a39a0918e66b8cb9052e525",
+    "content-hash": "5e7de5b5be39f81c730fe9de0e07ddea",
     "packages": [
         {
             "name": "brick/math",
@@ -2539,6 +2539,53 @@
                 "source": "https://github.com/livewire/volt"
             },
             "time": "2025-04-08T15:13:36+00:00"
+        },
+        {
+            "name": "luinuxscl/promptpress",
+            "version": "dev-main",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:luinuxscl/promptpress.git",
+                "reference": "8caff82509f786fdecad15a06871501218b65d44"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/luinuxscl/promptpress/zipball/8caff82509f786fdecad15a06871501218b65d44",
+                "reference": "8caff82509f786fdecad15a06871501218b65d44",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "^12.0"
+            },
+            "default-branch": true,
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Luinuxscl\\PromptPress\\PromptPressServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Luinuxscl\\PromptPress\\": "src/",
+                    "Luinuxscl\\PromptPress\\Database\\Seeders\\": "database/seeders/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Luis Sepulveda",
+                    "email": "lsepulveda@outlook.com",
+                    "homepage": "https://github.com/luinuxscl",
+                    "role": "developer"
+                }
+            ],
+            "description": "Modular AI-powered content management and auto-publishing for Laravel 12, designed for LikePlatform.",
+            "homepage": "https://like.cl",
+            "time": "2025-07-05T04:30:10+00:00"
         },
         {
             "name": "monolog/monolog",
@@ -10745,7 +10792,9 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": {},
+    "stability-flags": {
+        "luinuxscl/promptpress": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
