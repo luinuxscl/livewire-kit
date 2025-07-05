@@ -4,6 +4,12 @@ Todas las modificaciones importantes del proyecto se documentarán en este archi
 
 ## [Unreleased]
 
+### Fixed
+- Corregido el comando `likeplatform:root` para que establezca correctamente el campo `email_verified_at` al crear o actualizar un usuario root
+- Añadido `email_verified_at` a `$fillable` en el modelo User para permitir la asignación masiva
+- Mejorados los tests unitarios para verificar la correcta verificación de correo electrónico
+
+
 ## [1.1.2] - 2025-07-05
 
 ### Added

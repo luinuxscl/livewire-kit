@@ -7,7 +7,7 @@ Esta documentación describe los comandos personalizados con prefijo `likeplatfo
 ## likeplatform:root
 
 **Descripción:**
-Crear o actualizar un usuario con rol `root`.
+Crear o actualizar un usuario con rol `root`. Este comando marca automáticamente el correo del usuario como verificado.
 
 **Firma:**
 ```
@@ -15,14 +15,27 @@ php artisan likeplatform:root {name?} {email?} {password?}
 ```
 
 **Parámetros:**
-- `name` (opcional): Nombre del usuario.
-- `email` (opcional): Correo electrónico.
-- `password` (opcional): Contraseña.
+- `name` (opcional): Nombre del usuario. Si no se proporciona, se solicitará interactivamente.
+- `email` (opcional): Correo electrónico. Si no se proporciona, se solicitará interactivamente.
+- `password` (opcional): Contraseña. Si no se proporciona, se solicitará de forma segura.
 
-**Ejemplo:**
+**Comportamiento:**
+- Crea un nuevo usuario o actualiza uno existente con el correo proporcionado
+- Establece automáticamente `email_verified_at` con la fecha/hora actual
+- Asigna el rol `root` al usuario
+- La contraseña se hashea automáticamente antes de guardarse
+
+**Ejemplo de uso interactivo:**
 ```bash
-php artisan likeplatform:root Juan juan@ejemplo.com secret123
+php artisan likeplatform:root
 ```
+
+**Ejemplo con parámetros:**
+```bash
+php artisan likeplatform:root "Juan Pérez" juan@ejemplo.com "MiContraseñaSegura123"
+```
+
+**Nota:** Los usuarios creados con este comando no necesitan verificar su correo electrónico, ya que se marcan automáticamente como verificados.
 
 ---
 

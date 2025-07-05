@@ -39,15 +39,19 @@ class CreateRootUser extends Command
         // Crear el rol si no existe
         Role::firstOrCreate(['name' => $roleName]);
 
-        // Crear o actualizar usuario
-        $user = User::updateOrCreate(
-            ['email' => $email],
-            [
-                'name' => $name,
-                'password' => Hash::make($password),
-                'email_verified_at' => now(),
-            ]
-        );
+        // Buscar usuario existente o crear uno nuevo
+        $user = User::firstOrNew(['email' => $email]);
+        
+        // Actualizar atributos
+        $user->name = $name;
+        $user->email_verified_at = now();
+        
+        // Solo actualizar la contraseña si se proporcionó una
+        if (!empty($password)) {
+            $user->password = Hash::make($password);
+        }
+        
+        $user->save();
 
         // Asignar rol
         $user->assignRole($roleName);
