@@ -17,7 +17,7 @@
         "laravel/tinker": "^2.10.1",
         "livewire/flux": "^2.1.1",
         "livewire/volt": "^1.7.0",
-        "luinuxscl/promptpress": "dev-main",
+        "luinuxscl/promptpress": "*",
         "power-components/livewire-powergrid": "^6.3",
         "spatie/laravel-markdown": "^2.7",
         "spatie/laravel-permission": "^6.17"
@@ -85,8 +85,11 @@
     },
     "repositories": [
         {
-            "type": "vcs",
-            "url": "https://github.com/luinuxscl/promptpress"
+            "type": "path",
+            "url": "../packages/luinuxscl/promptpress",
+            "options": {
+                "symlink": true
+            }
         }
     ],   
     "minimum-stability": "dev",

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5e7de5b5be39f81c730fe9de0e07ddea",
+    "content-hash": "443a15fa5431abdbde4e944de0d04531",
     "packages": [
         {
             "name": "brick/math",
@@ -2542,22 +2542,15 @@
         },
         {
             "name": "luinuxscl/promptpress",
-            "version": "dev-main",
-            "source": {
-                "type": "git",
-                "url": "git@github.com:luinuxscl/promptpress.git",
-                "reference": "8caff82509f786fdecad15a06871501218b65d44"
-            },
+            "version": "0.1.1",
             "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/luinuxscl/promptpress/zipball/8caff82509f786fdecad15a06871501218b65d44",
-                "reference": "8caff82509f786fdecad15a06871501218b65d44",
-                "shasum": ""
+                "type": "path",
+                "url": "../packages/luinuxscl/promptpress",
+                "reference": "3584c62a8a1074162653538543e4ff558f21ea66"
             },
             "require": {
                 "illuminate/support": "^12.0"
             },
-            "default-branch": true,
             "type": "library",
             "extra": {
                 "laravel": {
@@ -2585,7 +2578,10 @@
             ],
             "description": "Modular AI-powered content management and auto-publishing for Laravel 12, designed for LikePlatform.",
             "homepage": "https://like.cl",
-            "time": "2025-07-05T04:30:10+00:00"
+            "transport-options": {
+                "symlink": true,
+                "relative": true
+            }
         },
         {
             "name": "monolog/monolog",
@@ -8289,16 +8285,16 @@
         },
         {
             "name": "myclabs/deep-copy",
-            "version": "1.13.2",
+            "version": "1.13.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/myclabs/DeepCopy.git",
-                "reference": "d25e62e636b0a9b01e3bdebb7823b474876dd829"
+                "reference": "faed855a7b5f4d4637717c2b3863e277116beb36"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/myclabs/DeepCopy/zipball/d25e62e636b0a9b01e3bdebb7823b474876dd829",
-                "reference": "d25e62e636b0a9b01e3bdebb7823b474876dd829",
+                "url": "https://api.github.com/repos/myclabs/DeepCopy/zipball/faed855a7b5f4d4637717c2b3863e277116beb36",
+                "reference": "faed855a7b5f4d4637717c2b3863e277116beb36",
                 "shasum": ""
             },
             "require": {
@@ -8337,7 +8333,7 @@
             ],
             "support": {
                 "issues": "https://github.com/myclabs/DeepCopy/issues",
-                "source": "https://github.com/myclabs/DeepCopy/tree/1.13.2"
+                "source": "https://github.com/myclabs/DeepCopy/tree/1.13.3"
             },
             "funding": [
                 {
@@ -8345,7 +8341,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-07-04T14:07:32+00:00"
+            "time": "2025-07-05T12:25:42+00:00"
         },
         {
             "name": "nunomaduro/collision",
@@ -10792,9 +10788,7 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": {
-        "luinuxscl/promptpress": 20
-    },
+    "stability-flags": {},
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
