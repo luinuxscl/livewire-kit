@@ -1,3 +1,4 @@
+<x-promptpress::menu />
 @role('admin|root')
     <flux:dropdown>
         <flux:button icon:trailing="chevron-down" variant="ghost" class="cursor-pointer">{{ __('Admin') }}</flux:button>

@@ -21,6 +21,7 @@
 @source '../../app/Livewire/**/*Table.php';
 @source '../../vendor/power-components/livewire-powergrid/src/Themes/Tailwind.php';
 @source '../../vendor/power-components/livewire-powergrid/resources/views/**/*.php';
+@source '../../vendor/luinuxscl/promptpress/resources/views/**/*.blade.php';
 
 
 @layer theme {
@@ -101,7 +102,7 @@
 }
 
 .bg-default {
-    @apply bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-sm overflow-hidden;
+    @apply overflow-hidden bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700;
 }
 
 .btn {
@@ -125,7 +126,7 @@
 }
 
 .btn-muted {
-    @apply border-gray-500 text-gray-50 bg-gray-500 hover:bg-gray-600;
+    @apply bg-gray-500 border-gray-500 text-gray-50 hover:bg-gray-600;
 }
 
 @layer theme {
