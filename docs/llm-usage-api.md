@@ -2,7 +2,7 @@
 
 ## Descripción
 
-Este documento proporciona información sobre cómo utilizar el endpoint API para registrar estadísticas de uso de modelos de lenguaje (LLM) en el sistema. Este endpoint está diseñado para ser utilizado por aplicaciones externas como n8n para registrar el consumo de tokens de LLM.
+Este documento proporciona información sobre cómo utilizar los endpoints API para registrar y consultar estadísticas de uso de modelos de lenguaje (LLM) en el sistema. Estos endpoints están diseñados para ser utilizados por aplicaciones externas como n8n para registrar y monitorear el consumo de tokens de LLM.
 
 ## Autenticación
 
@@ -12,9 +12,9 @@ Todas las solicitudes a la API deben incluir un token de autenticación en el en
 Authorization: Bearer {token}
 ```
 
-## Endpoint
+## Endpoints
 
-### Registrar Uso de LLM
+### 1. Registrar Uso de LLM
 
 Registra un nuevo evento de uso de un modelo de lenguaje.
 
@@ -28,7 +28,16 @@ Registra un nuevo evento de uso de un modelo de lenguaje.
 |-------------------|---------|-----------|-----------------------------------------------------------------------------|
 | usable_type       | string  | Sí        | Clase completa del modelo al que se asocia el uso (ej: `App\\Models\\User`) |
 | usable_id         | integer | Sí        | ID del modelo al que se asocia el uso                                       |
-| provider          | string  | Sí        | Proveedor del LLM (ej: `OpenAI`, `Anthropic`, `Google`, `Meta`)             |
+| provider          | string  | Sí        | Proveedor del LLM (valores: `OPENAI`, `ANTHROPIC`, `GOOGLE`, `META`, etc.)  |
+| model             | string  | Sí        | Modelo específico utilizado (ej: `gpt-4`, `claude-3-opus`)                  |
+| proxy             | string  | No        | Proxy utilizado (valores: `OPENROUTER`, `TOGETHER`, `REPLICATE`, etc.)      |
+| task_type         | string  | Sí        | Tipo de tarea (valores: `TEXT`, `IMAGE`, `AUDIO`, `VIDEO`, etc.)            |
+| prompt_tokens     | integer | Sí        | Número de tokens usados en el prompt (≥ 0)                                  |
+| completion_tokens | integer | Sí        | Número de tokens usados en la respuesta (≥ 0)                               |
+| cost              | number  | No        | Costo de la operación (≥ 0)                                                 |
+| amount_in_usd     | number  | No        | Monto en dólares (≥ 0)                                                      |
+| amount_in_clp     | number  | No        | Monto en pesos chilenos (≥ 0)                                               |
+| metadata          | object  | No        | Metadatos adicionales en formato JSON                                       |
 | model             | string  | Sí        | Modelo específico utilizado (ej: `gpt-4`, `claude-3-opus`)                  |
 | prompt_tokens     | integer | Sí        | Número de tokens usados en el prompt (≥ 0)                                  |
 | completion_tokens | integer | Sí        | Número de tokens usados en la respuesta (≥ 0)                               |
@@ -45,10 +54,17 @@ Content-Type: application/json
 {
     "usable_type": "App\\Models\\User",
     "usable_id": 1,
-    "provider": "OpenAI",
+    "provider": "OPENAI",
     "model": "gpt-4",
+    "proxy": "OPENROUTER",
+    "task_type": "TEXT",
     "prompt_tokens": 150,
-    "completion_tokens": 300
+    "completion_tokens": 300,
+    "amount_in_usd": 0.10,
+    "metadata": {
+        "session_id": "abc123",
+        "endpoint": "/v1/chat/completions"
+    }
 }
 ```
 
@@ -56,18 +72,25 @@ Content-Type: application/json
 
 ```json
 {
-    "message": "Registro de uso de LLM creado exitosamente.",
+    "message": "Uso registrado exitosamente",
     "data": {
         "id": 1,
-        "usable_type": "App\\Models\\User",
-        "usable_id": 1,
-        "provider": "OpenAI",
+        "provider": "OPENAI",
         "model": "gpt-4",
+        "proxy": "OPENROUTER",
+        "task_type": "TEXT",
         "prompt_tokens": 150,
         "completion_tokens": 300,
         "total_tokens": 450,
-        "created_at": "2025-06-17T16:53:48.000000Z",
-        "updated_at": "2025-06-17T16:53:48.000000Z"
+        "cost": 0.10,
+        "amount_in_usd": 0.10,
+        "amount_in_clp": 90.50,
+        "metadata": {
+            "session_id": "abc123",
+            "endpoint": "/v1/chat/completions"
+        },
+        "created_at": "2025-07-14T15:30:00Z",
+        "updated_at": "2025-07-14T15:30:00Z"
     }
 }
 ```
@@ -93,6 +116,56 @@ Content-Type: application/json
 }
 ```
 
+### 2. Obtener Estadísticas de Uso
+
+Obtiene estadísticas agregadas de uso de LLM.
+
+- **URL**: `/api/llm-usage/stats`
+- **Método**: `GET`
+- **Autenticación requerida**: Sí
+
+#### Parámetros de Consulta
+
+| Parámetro | Tipo   | Requerido | Descripción                           |
+|-----------|--------|-----------|---------------------------------------|
+| provider  | string | No        | Filtrar por proveedor (ej: `OPENAI`) |
+| model     | string | No        | Filtrar por modelo (ej: `gpt-4`)     |
+| task_type | string | No        | Filtrar por tipo de tarea (ej: `TEXT`) |
+| proxy     | string | No        | Filtrar por proxy (ej: `OPENROUTER`)  |
+
+#### Ejemplo de Respuesta
+
+```json
+{
+    "data": [
+        {
+            "provider": "OPENAI",
+            "model": "gpt-4",
+            "task_type": "TEXT",
+            "proxy": "OPENROUTER",
+            "total_prompt_tokens": 1500,
+            "total_completion_tokens": 3000,
+            "total_tokens": 4500,
+            "total_amount_usd": 0.45,
+            "total_amount_clp": 400,
+            "request_count": 5
+        },
+        {
+            "provider": "ANTHROPIC",
+            "model": "claude-2",
+            "task_type": "TEXT",
+            "proxy": "OPENROUTER",
+            "total_prompt_tokens": 2000,
+            "total_completion_tokens": 2500,
+            "total_tokens": 4500,
+            "total_amount_usd": 0.30,
+            "total_amount_clp": 270,
+            "request_count": 3
+        }
+    ]
+}
+```
+
 ## Ejemplos de Uso
 
 ### Con cURL
@@ -105,10 +178,16 @@ curl -X POST \
   -d '{
     "usable_type": "App\\\\Models\\\\User",
     "usable_id": 1,
-    "provider": "OpenAI",
+    "provider": "OPENAI",
     "model": "gpt-4",
+    "proxy": "OPENROUTER",
+    "task_type": "TEXT",
     "prompt_tokens": 120,
-    "completion_tokens": 240
+    "completion_tokens": 240,
+    "amount_in_usd": 0.10,
+    "metadata": {
+        "session_id": "abc123"
+    }
   }'
 ```
 
@@ -125,12 +204,15 @@ curl -X POST \
    - **Body**:
      ```json
      {
-       "usable_type": "App\\\\Models\\\\User",
+       "usable_type": "App\\\\\\\\Models\\\\User",
        "usable_id": 1,
-       "provider": "OpenAI",
+       "provider": "OPENAI",
        "model": "gpt-4",
+       "proxy": "OPENROUTER",
+       "task_type": "TEXT",
        "prompt_tokens": 120,
-       "completion_tokens": 240
+       "completion_tokens": 240,
+       "amount_in_usd": 0.10
      }
      ```
 3. Configura la autenticación OAuth2 según corresponda.

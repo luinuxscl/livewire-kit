@@ -3,7 +3,9 @@
 ## Tabla de Contenidos
 - [Descripción General](#descripción-general)
 - [Estructura del Modelo](#estructura-del-modelo)
-- [Servicio Asociado](#servicio-asociado)
+- [Enums Relacionados](#enums-relacionados)
+- [Métodos Principales](#métodos-principales)
+- [Scopes de Consulta](#scopes-de-consulta)
 - [Relaciones](#relaciones)
 - [Ejemplos de Uso](#ejemplos-de-uso)
 - [Consideraciones](#consideraciones)
@@ -23,35 +25,137 @@ El modelo `LlmUsageStatistic` se encarga de rastrear y almacenar estadísticas d
 | `id` | bigint | Identificador único |
 | `usable_id` | bigint | ID del modelo relacionado |
 | `usable_type` | string | Clase del modelo relacionado |
-| `provider` | string | Proveedor del LLM (ej: OpenAI, Anthropic) |
-| `model` | string | Modelo específico utilizado |
+| `provider` | `LlmProviderEnum` | Proveedor del LLM (ej: OpenAI, Anthropic, Google) |
+| `model` | string | Modelo específico utilizado (ej: gpt-4, claude-3-opus) |
+| `proxy` | `LlmProxyEnum` (nullable) | Proxy utilizado para la conexión (OpenRouter, Together, etc.) |
+| `task_type` | `LlmTaskTypeEnum` | Tipo de tarea realizada (texto, imagen, audio, etc.) |
 | `prompt_tokens` | integer | Tokens usados en el prompt |
 | `completion_tokens` | integer | Tokens usados en la respuesta |
 | `total_tokens` | integer | Suma de prompt_tokens + completion_tokens |
+| `cost` | decimal(10,2) | Costo de la operación |
+| `amount_in_usd` | decimal(10,2) | Monto en dólares |
+| `amount_in_clp` | decimal(10,2) | Monto en pesos chilenos |
+| `metadata` | json | Metadatos adicionales de la operación |
 | `created_at` | timestamp | Fecha de creación |
 | `updated_at` | timestamp | Fecha de actualización |
 
-## Servicio Asociado
+### Índices
 
-### `LlmUsageService`
+- Índice compuesto: `['provider', 'model', 'proxy']`
+- Índice compuesto: `['provider', 'task_type']`
+- Índice simple: `['proxy']`
+- Índice simple: `['task_type']`
 
-Clase que gestiona la creación de registros de uso de LLM.
+## Enums Relacionados
 
-#### Métodos
+### 1. LlmProviderEnum
 
-##### `record(Model $usable, string $provider, string $model, int $promptTokens, int $completionTokens): LlmUsageStatistic`
+Proveedores de modelos de lenguaje soportados:
 
-Registra una nueva entrada de uso de LLM.
+- `OPENAI`: OpenAI
+- `ANTHROPIC`: Anthropic
+- `GOOGLE`: Google
+- `META`: Meta
+- `STABILITY`: Stability AI
+- `MIDJOURNEY`: Midjourney
+- `MISTRAL`: Mistral
+- `COHERE`: Cohere
+- `PERPLEXITY`: Perplexity
+- `GROQ`: Groq
+- `XAI`: xAI
+- `DEEPSEEK`: DeepSeek
 
-**Parámetros:**
-- `$usable`: Modelo al que se asocia el uso (ej: User, Product)
-- `$provider`: Proveedor del LLM (ej: 'OpenAI')
-- `$model`: Modelo específico utilizado (ej: 'gpt-4')
-- `$promptTokens`: Tokens usados en el prompt
-- `$completionTokens`: Tokens usados en la respuesta
+### 2. LlmProxyEnum
 
-**Retorna:**
-- Instancia de `LlmUsageStatistic` con los datos registrados
+Proxies/intermediarios soportados:
+
+- `OPENROUTER`: OpenRouter
+- `TOGETHER`: Together AI
+- `REPLICATE`: Replicate
+- `HUGGINGFACE`: Hugging Face
+- `ANYSCALE`: Anyscale
+- `FIREWORKS`: Fireworks AI
+
+### 3. LlmTaskTypeEnum
+
+Tipos de tareas que se pueden realizar:
+
+- `TEXT`: Generación de Texto
+- `IMAGE`: Generación de Imágenes
+- `AUDIO`: Generación de Audio
+- `VIDEO`: Generación de Video
+- `EMBEDDING`: Embeddings
+- `MODERATION`: Moderación de Contenido
+- `FINE_TUNING`: Fine-tuning
+
+Cada tipo de tarea incluye:
+- Etiqueta descriptiva
+- Ícono asociado
+- Unidades de medida típicas
+- Método para verificar si usa tokens para precios
+
+## Métodos Principales
+
+### `recordUsage`
+
+Método principal para registrar cualquier uso de LLM.
+
+```php
+public static function recordUsage(
+    $usable,
+    LlmProviderEnum $provider,
+    string $model,
+    LlmTaskTypeEnum $taskType = LlmTaskTypeEnum::TEXT,
+    int $promptTokens = 0,
+    int $completionTokens = 0,
+    ?float $cost = null,
+    ?float $amountInUsd = null,
+    ?float $amountInClp = null,
+    ?LlmProxyEnum $proxy = null,
+    ?array $metadata = null
+): self
+```
+
+### `recordOpenRouterUsage`
+
+Método específico para registrar usos a través de OpenRouter.
+
+```php
+public static function recordOpenRouterUsage(
+    $usable,
+    LlmProviderEnum $provider,
+    string $model,
+    LlmTaskTypeEnum $taskType = LlmTaskTypeEnum::TEXT,
+    int $promptTokens = 0,
+    int $completionTokens = 0,
+    ?float $amountInUsd = null,
+    ?array $metadata = null
+): self
+```
+
+### `recordDirectUsage`
+
+Método para registrar usos directos (sin proxy).
+
+```php
+public static function recordDirectUsage(
+    $usable,
+    LlmProviderEnum $provider,
+    string $model,
+    LlmTaskTypeEnum $taskType = LlmTaskTypeEnum::TEXT,
+    int $promptTokens = 0,
+    int $completionTokens = 0,
+    ?float $amountInUsd = null,
+    ?array $metadata = null
+): self
+```
+
+## Scopes de Consulta
+
+- `byProvider(LlmProviderEnum $provider)`: Filtra por proveedor
+- `byProxy(LlmProxyEnum $proxy)`: Filtra por proxy
+- `byTaskType(LlmTaskTypeEnum $taskType)`: Filtra por tipo de tarea
+- `viaOpenRouter()`: Filtra usos a través de OpenRouter
 
 ## Relaciones
 
@@ -70,83 +174,220 @@ public function usageStatistics(): \Illuminate\Database\Eloquent\Relations\Morph
 
 ## Ejemplos de Uso
 
-### 1. Registrar Uso de LLM
+### 1. Registrar Uso Directo (sin proxy)
 
 ```php
-use App\Services\LlmUsageService;
-use App\Models\User;
+use App\Models\LlmUsageStatistic;
+use App\Enums\LlmProviderEnum;
+use App\Enums\LlmTaskTypeEnum;
 
-// Obtener el usuario (o cualquier otro modelo)
-$user = User::find(1);
-
-// Registrar uso
-$llmService = new LlmUsageService();
-$statistic = $llmService->record(
-    usable: $user,
-    provider: 'OpenAI',
+// Registrar uso directo (sin proxy)
+$usage = LlmUsageStatistic::recordDirectUsage(
+    usable: $user, // Modelo al que se asocia el uso
+    provider: LlmProviderEnum::OPENAI,
     model: 'gpt-4',
-    promptTokens: 150,
-    completionTokens: 300
+    taskType: LlmTaskTypeEnum::TEXT,
+    promptTokens: 100,
+    completionTokens: 50,
+    amountInUsd: 0.10
 );
 ```
 
-### 2. Obtener Estadísticas de un Usuario
+### 2. Registrar Uso a través de OpenRouter
 
 ```php
-$user = User::with('usageStatistics')->find(1);
-$stats = $user->usageStatistics;
+use App\Models\LlmUsageStatistic;
+use App\Enums\LlmProviderEnum;
+use App\Enums\LlmTaskTypeEnum;
 
-echo "Total de tokens usados: " . $stats->sum('total_tokens');
+$usage = LlmUsageStatistic::recordOpenRouterUsage(
+    usable: $user,
+    provider: LlmProviderEnum::ANTHROPIC,
+    model: 'claude-2',
+    taskType: LlmTaskTypeEnum::TEXT,
+    promptTokens: 200,
+    completionTokens: 100,
+    amountInUsd: 0.15
+);
 ```
 
-### 3. Obtener Estadísticas por Proveedor
+### 3. Consultar Estadísticas
 
 ```php
-$openAIStats = LlmUsageStatistic::where('provider', 'OpenAI')
-    ->where('usable_id', $user->id)
-    ->where('usable_type', get_class($user))
+// Obtener estadísticas de un usuario
+$user = User::with('usageStatistics')->find(1);
+
+// Total de tokens usados
+echo "Total tokens: " . $user->usageStatistics->sum('total_tokens');
+
+// Uso por proveedor
+$byProvider = $user->usageStatistics
+    ->groupBy('provider')
+    ->map(fn($items) => $items->sum('total_tokens'));
+
+// Uso por tipo de tarea
+$byTask = $user->usageStatistics
+    ->groupBy('task_type')
+    ->map(fn($items) => $items->sum('total_tokens'));
+```
+
+### 4. Usando Scopes para Consultas Avanzadas
+
+```php
+// Obtener todos los usos de OpenAI a través de OpenRouter
+$openAIviaOpenRouter = LlmUsageStatistic::query()
+    ->byProvider(LlmProviderEnum::OPENAI)
+    ->viaOpenRouter()
+    ->get();
+
+// Obtener estadísticas de generación de imágenes
+$imageGenerations = LlmUsageStatistic::query()
+    ->byTaskType(LlmTaskTypeEnum::IMAGE)
     ->get();
 ```
 
 ## Métodos Útiles
 
-### Obtener Total de Tokens por Período
+### Obtener Costo Total por Período
 
 ```php
-public function getTotalTokensByPeriod($startDate, $endDate)
+/**
+ * Obtiene el costo total en un período de tiempo específico
+ *
+ * @param  string|Carbon  $startDate
+ * @param  string|Carbon  $endDate
+ * @param  string|null  $currency  'usd' o 'clp', null para ambos
+ * @return array
+ */
+public static function getTotalCostByPeriod($startDate, $endDate, $currency = null)
 {
-    return $this->whereBetween('created_at', [$startDate, $endDate])
-        ->sum('total_tokens');
+    $query = static::query()
+        ->whereBetween('created_at', [$startDate, $endDate]);
+    
+    $result = [];
+    
+    if (!$currency || $currency === 'usd') {
+        $result['usd'] = (float) $query->sum('amount_in_usd');
+    }
+    
+    if (!$currency || $currency === 'clp') {
+        $result['clp'] = (float) $query->sum('amount_in_clp');
+    }
+    
+    return $currency ? $result[$currency] ?? 0 : $result;
 }
 ```
 
-### Obtener Uso por Modelo
+### Obtener Uso Agrupado por Proveedor y Modelo
 
 ```php
-public function getUsageByModel($userId)
+/**
+ * Obtiene el uso agrupado por proveedor y modelo
+ *
+ * @param  string|Carbon  $startDate
+ * @param  string|Carbon  $endDate
+ * @return \Illuminate\Database\Eloquent\Collection
+ */
+public static function getUsageByProviderAndModel($startDate = null, $endDate = null)
 {
-    return $this->where('usable_id', $userId)
-        ->where('usable_type', User::class)
-        ->selectRaw('model, SUM(total_tokens) as total_tokens')
-        ->groupBy('model')
-        ->get();
+    $query = static::query()
+        ->select([
+            'provider',
+            'model',
+            \DB::raw('SUM(prompt_tokens) as total_prompt_tokens'),
+            \DB::raw('SUM(completion_tokens) as total_completion_tokens'),
+            \DB::raw('SUM(total_tokens) as total_tokens'),
+            \DB::raw('SUM(amount_in_usd) as total_usd'),
+            \DB::raw('SUM(amount_in_clp) as total_clp'),
+            \DB::raw('COUNT(*) as request_count')
+        ])
+        ->groupBy(['provider', 'model']);
+    
+    if ($startDate && $endDate) {
+        $query->whereBetween('created_at', [$startDate, $endDate]);
+    }
+    
+    return $query->get();
+}
+```
+
+### Obtener Estadísticas por Tipo de Tarea
+
+```php
+/**
+ * Obtiene estadísticas agrupadas por tipo de tarea
+ *
+ * @param  string|Carbon  $startDate
+ * @param  string|Carbon  $endDate
+ * @return \Illuminate\Database\Eloquent\Collection
+ */
+public static function getStatsByTaskType($startDate = null, $endDate = null)
+{
+    $query = static::query()
+        ->select([
+            'task_type',
+            \DB::raw('SUM(total_tokens) as total_tokens'),
+            \DB::raw('SUM(amount_in_usd) as total_usd'),
+            \DB::raw('COUNT(*) as request_count')
+        ])
+        ->groupBy('task_type');
+    
+    if ($startDate && $endDate) {
+        $query->whereBetween('created_at', [$startDate, $endDate]);
+    }
+    
+    return $query->get();
 }
 ```
 
 ## Consideraciones
 
-1. **Rendimiento**: Para grandes volúmenes de datos, considera agregar índices a las columnas frecuentemente consultadas.
-2. **Privacidad**: Asegúrate de manejar adecuadamente los datos sensibles que puedan estar asociados a las estadísticas.
-3. **Retención**: Implementa un sistema de limpieza de datos antiguos si no son necesarios indefinidamente.
+1. **Rendimiento**: 
+   - Los índices están optimizados para consultas comunes por proveedor, modelo, proxy y tipo de tarea.
+   - Para grandes volúmenes de datos, considera particionar la tabla por rangos de fechas.
+
+2. **Privacidad**: 
+   - Los metadatos pueden contener información sensible. Asegúrate de no incluir datos personales identificables (PII) en este campo.
+   - Considera implementar enmascaramiento de datos para información sensible.
+
+3. **Monitoreo de Costos**:
+   - Los campos `amount_in_usd` y `amount_in_clp` permiten hacer seguimiento de costos en diferentes monedas.
+   - Implementa alertas cuando se alcancen ciertos umbrales de gasto.
+
+4. **Extensibilidad**:
+   - El campo `metadata` permite almacenar información adicional específica de cada proveedor o caso de uso.
+   - La relación polimórfica permite asociar los registros de uso con cualquier modelo de la aplicación.
 
 ## Posibles Mejoras
 
-1. **Agregación de Datos**: Implementar métodos para obtener totales por período (día, semana, mes).
-2. **Límites de Uso**: Añadir funcionalidad para verificar y hacer cumplir límites de uso.
-3. **Dashboard**: Crear un panel de administración para visualizar métricas de uso.
-4. **Notificaciones**: Implementar alertas cuando se alcancen ciertos umbrales de uso.
-5. **Exportación**: Añadir capacidad para exportar reportes en diferentes formatos (CSV, PDF).
+1. **Caché de Estadísticas**
+   - Implementar un sistema de caché para métricas frecuentemente consultadas.
+   - Usar Redis para almacenar y actualizar estadísticas en tiempo real.
+
+2. **Límites de Uso**
+   - Implementar un sistema de cuotas y límites de uso por usuario o equipo.
+   - Notificar a los usuarios cuando se acerquen a sus límites.
+
+3. **Dashboard Avanzado**
+   - Crear un panel de administración con gráficos y métricas en tiempo real.
+   - Incluir comparativas de costos entre diferentes proveedores y modelos.
+
+4. **Análisis de Costo-Efectividad**
+   - Implementar análisis para determinar qué modelos ofrecen el mejor rendimiento por costo.
+   - Sugerir modelos más económicos para tareas específicas.
+
+5. **Integración con Facturación**
+   - Conectar con el sistema de facturación para cargar el uso a las cuentas correspondientes.
+   - Generar informes de costos por departamento o proyecto.
+
+6. **Monitoreo de Rendimiento**
+   - Registrar tiempos de respuesta de cada proveedor.
+   - Identificar cuellos de botella y optimizar el enrutamiento de solicitudes.
+
+7. **Exportación de Datos**
+   - Permitir la exportación de datos en formatos como CSV, Excel y PDF.
+   - Programar envíos automáticos de informes por correo electrónico.
 
 ---
 
-*Última actualización: 2025-06-17*
+*Última actualización: 2025-07-14*
