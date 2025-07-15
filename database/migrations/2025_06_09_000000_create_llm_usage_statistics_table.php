@@ -11,16 +11,22 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::table('llm_usage_statistics', function (Blueprint $table) {
-            // Cambiar provider a enum
-            $table->enum('provider', LlmProviderEnum::values())->change();
-            
-            // Agregar nuevos campos
-            $table->enum('proxy', LlmProxyEnum::values())->nullable()->after('model');
-            $table->enum('task_type', LlmTaskTypeEnum::values())
-                  ->default(LlmTaskTypeEnum::TEXT->value)->after('proxy');
-            $table->json('metadata')->nullable()->after('amount_in_clp');
-            
+        Schema::create('llm_usage_statistics', function (Blueprint $table) {
+            $table->id();
+            $table->morphs('usable'); // Creates usable_id and usable_type
+            $table->enum('provider', LlmProviderEnum::values());
+            $table->string('model');
+            $table->enum('proxy', LlmProxyEnum::values())->nullable();
+            $table->enum('task_type', LlmTaskTypeEnum::values())->default(LlmTaskTypeEnum::TEXT->value);
+            $table->unsignedInteger('prompt_tokens')->default(0);
+            $table->unsignedInteger('completion_tokens')->default(0);
+            $table->unsignedInteger('total_tokens')->default(0);
+            $table->decimal('cost', 15, 10)->default(0);
+            $table->decimal('amount_in_usd', 10, 2)->default(0);
+            $table->decimal('amount_in_clp', 10, 2)->default(0);
+            $table->json('metadata')->nullable();
+            $table->timestamps();
+
             // Índices
             $table->index(['provider', 'model', 'proxy']);
             $table->index(['provider', 'task_type']);
@@ -31,8 +37,6 @@ return new class extends Migration
 
     public function down(): void
     {
-        Schema::table('llm_usage_statistics', function (Blueprint $table) {
-            $table->dropColumn(['proxy', 'task_type', 'metadata']);
-        });
+        Schema::dropIfExists('llm_usage_statistics');
     }
 };
